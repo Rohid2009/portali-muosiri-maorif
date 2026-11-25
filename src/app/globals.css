@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { -webkit-text-size-adjust: 100%; }
+body { @apply bg-page text-ink antialiased; font-size: 15.5px; }
+
+@layer components {
+  /* Заминаи «дафтари катакдор» */
+  .bg-notebook {
+    background-image: linear-gradient(rgba(11, 79, 138, .07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 79, 138, .07) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+  .bg-notebook-dark {
+    background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  .card { @apply mb-5 rounded-[18px] border border-slate-200/80 bg-white p-4 shadow-soft sm:p-5; }
+  .card-title { @apply mb-4 flex items-center gap-2 text-[17px] font-semibold; }
+
+  .btn-primary {
+    @apply inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 text-base font-semibold text-white
+           shadow-sm transition hover:bg-brand-dark focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 disabled:opacity-60;
+  }
+  .btn-small {
+    @apply inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-xl bg-brand px-4 text-sm font-semibold text-white
+           transition hover:bg-brand-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/30 disabled:opacity-60;
+  }
+  .btn-ghost {
+    @apply inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-xl px-4 text-sm font-semibold text-brand
+           ring-[1.5px] ring-inset ring-brand/35 transition hover:bg-brand-light;
+  }
+  .input {
+    @apply w-full rounded-[10px] border-[1.5px] border-slate-200 bg-white px-3 py-2.5 text-base
+           focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/15;
+  }
+  .select {
+    @apply rounded-[10px] border-[1.5px] border-slate-200 bg-white px-3 py-2 text-base focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/15;
+  }
+  .label { @apply flex flex-col gap-1.5 text-sm font-semibold; }
+
+  .tbl { @apply w-full border-separate border-spacing-0 text-sm; }
+  .tbl th { @apply whitespace-nowrap border-b border-slate-200 px-2.5 py-2.5 text-left text-[12.5px] font-semibold text-slate-500; }
+  .tbl td { @apply border-b border-slate-100 px-2.5 py-2.5 align-middle; }
+  .tbl tr:last-child td { @apply border-b-0; }
+  .table-wrap { @apply -mx-4 overflow-x-auto px-4 sm:-mx-5 sm:px-5; }
+
+  /* Катакҳои журнали чоряк — мисли дафтар */
+  .nb-cell {
+    @apply border-l border-brand/10 p-0 text-center;
+    background-image: linear-gradient(rgba(11, 79, 138, .06) 1px, transparent 1px);
+    background-size: 100% 13px;
+  }
+  .nb-cell a { @apply grid h-[46px] min-w-[44px] place-items-center hover:bg-brand-light; }
+
+  /* Баҳо */
+  .grade { @apply inline-grid h-[30px] min-w-[30px] place-items-center rounded-[9px] px-1.5 text-sm font-bold tabular-nums; }
+  .grade-9 { @apply bg-green-100 text-green-700; }
+  .grade-7 { @apply bg-blue-100 text-blue-700; }
+  .grade-5 { @apply bg-amber-100 text-amber-700; }
+  .grade-3 { @apply bg-red-100 text-red-700; }
+
+  .pill { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+  .pill-red { @apply bg-red-100 text-red-700; }
+  .pill-amber { @apply bg-amber-100 text-amber-700; }
+  .pill-green { @apply bg-green-100 text-green-700; }
+  .pill-blue { @apply bg-brand-light text-brand; }
+  .pill-gray { @apply bg-slate-100 text-slate-600; }
+  .badge { @apply inline-block rounded-full px-2 py-0.5 text-xs font-medium; }
+
+  .stat { @apply flex items-center gap-3 rounded-[18px] border border-slate-200/80 bg-white px-4 py-4 shadow-soft; }
+
+  /* Интихоби уфуқӣ */
+  .seg { @apply mb-5 inline-flex flex-wrap gap-0.5 rounded-xl border border-slate-200 bg-slate-50 p-[3px]; }
+  .seg a { @apply whitespace-nowrap rounded-[9px] px-3.5 py-1.5 text-sm font-medium text-slate-600 hover:text-ink; }
+  .seg a.seg-on { @apply bg-white font-bold text-brand shadow-soft; }
+
+  /* Давомот: Ҳаст / Нест / Сабабнок */
+  .att { @apply inline-flex overflow-hidden rounded-[10px] border-[1.5px] border-slate-200; }
+  .att input { @apply sr-only; }
+  .att label { @apply cursor-pointer border-l-[1.5px] border-slate-200 px-2.5 py-1.5 text-[13px] font-semibold text-slate-500; }
+  .att label:first-of-type { @apply border-l-0; }
+  .att input:checked + label.att-p { @apply bg-green-100 text-green-700; }
+  .att input:checked + label.att-a { @apply bg-red-100 text-red-700; }
+  .att input:checked + label.att-e { @apply bg-amber-100 text-amber-700; }
+  .att input:focus-visible + label { @apply ring-[3px] ring-inset ring-blue-400; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main { animation: page-in .22s ease-out; }
+  @keyframes page-in { from { opacity: 0; transform: translateY(6px); } }
+}
+
+@media print {
+  body { background: white; }
+  .card, .stat { box-shadow: none; border-color: #ddd; }
+}
+
+/* ═══════════════ Дизайни нав: торики кабуд, шиша (аз рӯи тасвири мактаб) ═══════════════ */
+html { background: #eef3fb; }
+html.dark { background: #050d24; color-scheme: dark; }
+body { background: radial-gradient(900px 500px at 85% 0%, rgba(42,123,255,.12), transparent 60%), #eef3fb; }
+html.dark body {
+  background:
+    radial-gradient(1100px 620px at 85% 5%, rgba(42,123,255,.28), transparent 60%),
+    radial-gradient(900px 600px at -10% 90%, rgba(0,190,255,.12), transparent 60%),
+    linear-gradient(180deg, #071637 0%, #050d24 55%, #040a1c 100%);
+  color: #eaf1ff;
+}
+@media (min-width: 900px) { body, html.dark body { background-attachment: fixed; } }
+
+@layer components {
+  .glass { @apply border border-brand/10 bg-white/75 backdrop-blur-xl; }
+  .dark .glass { background: rgba(255,255,255,.06); border-color: rgba(140,170,255,.18); }
+  .dark .card, .dark .stat { background: rgba(16,34,80,.62); border-color: rgba(140,170,255,.16); box-shadow: 0 6px 22px rgba(0,0,0,.35); backdrop-filter: blur(14px); }
+  .dark .btn-primary, .dark .btn-small { background: linear-gradient(135deg, #2f86ff, #1758e6); box-shadow: 0 8px 22px rgba(42,123,255,.35); }
+  .dark .btn-ghost { color: #8fd3ff; --tw-ring-color: rgba(92,200,255,.35); }
+  .dark .btn-ghost:hover { background: rgba(42,123,255,.14); }
+  .dark .input, .dark .select { background: rgba(255,255,255,.06); border-color: rgba(140,170,255,.2); color: #eaf1ff; }
+  .dark .input::placeholder { color: #7f93b8; }
+  .dark .select option { background: #0b1a3e; }
+  .dark .tbl th { color: #9db0d4; border-color: rgba(140,170,255,.16); }
+  .dark .tbl td { border-color: rgba(140,170,255,.1); }
+  .dark .seg { background: rgba(255,255,255,.05); border-color: rgba(140,170,255,.16); }
+  .dark .seg a { color: #9db0d4; }
+  .dark .seg a.seg-on { background: rgba(42,123,255,.22); color: #eaf1ff; }
+  .dark .att { border-color: rgba(140,170,255,.2); }
+  .dark .att label { border-color: rgba(140,170,255,.2); color: #9db0d4; }
+  .dark .att input:checked + label.att-p, .dark .grade-9, .dark .pill-green { background: rgba(34,197,94,.16); color: #86efac; }
+  .dark .att input:checked + label.att-a, .dark .grade-3, .dark .pill-red { background: rgba(239,68,68,.16); color: #fca5a5; }
+  .dark .att input:checked + label.att-e, .dark .grade-5, .dark .pill-amber { background: rgba(245,158,11,.16); color: #fcd34d; }
+  .dark .grade-7 { background: rgba(59,130,246,.2); color: #93c5fd; }
+  .dark .pill-blue { background: rgba(42,123,255,.18); color: #8fd3ff; }
+  .dark .pill-gray { background: rgba(255,255,255,.08); color: #b4c3e0; }
+  .dark .nb-cell { border-color: rgba(140,170,255,.12); background-image: linear-gradient(rgba(140,192,238,.06) 1px, transparent 1px); }
+  .dark .nb-cell a:hover { background: rgba(42,123,255,.14); }
+}
+
+/* Тағйири рангҳои ёрирасон дар реҷаи торик */
+.dark .bg-white { background-color: #0f2250; }
+.dark .bg-slate-50, .dark .bg-slate-50\/70 { background-color: rgba(255,255,255,.04); }
+.dark .bg-slate-100 { background-color: rgba(255,255,255,.07); }
+.dark .bg-slate-200 { background-color: rgba(255,255,255,.12); }
+.dark .border-slate-100, .dark .border-slate-200, .dark .border-slate-200\/80, .dark .border-slate-300 { border-color: rgba(140,170,255,.16); }
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(140,170,255,.12); }
+.dark .text-ink { color: #eaf1ff; }
+.dark .text-slate-400 { color: #7f93b8; }
+.dark .text-slate-500 { color: #9db0d4; }
+.dark .text-slate-600 { color: #b4c3e0; }
+.dark .text-slate-700 { color: #cdd8ee; }
+.dark .text-brand { color: #5cc8ff; }
+.dark .text-brand-dark { color: #9cc2ff; }
+.dark .bg-brand-light, .dark .bg-brand-light\/60 { background-color: rgba(42,123,255,.16); }
+.dark .hover\:bg-brand-light:hover { background-color: rgba(42,123,255,.18); }
+.dark .hover\:bg-slate-50:hover { background-color: rgba(255,255,255,.05); }
+.dark .has-\[\:checked\]\:bg-brand-light:has(:checked) { background-color: rgba(42,123,255,.22); }
+.dark .bg-green-50, .dark .bg-green-50\/70, .dark .bg-green-100 { background-color: rgba(34,197,94,.14); }
+.dark .text-green-700, .dark .text-green-800 { color: #86efac; }
+.dark .bg-amber-50, .dark .bg-amber-100, .dark .bg-gold-light { background-color: rgba(245,158,11,.14); }
+.dark .text-amber-600, .dark .text-amber-700, .dark .text-amber-800, .dark .text-amber-900 { color: #fcd34d; }
+.dark .bg-red-50, .dark .bg-red-100 { background-color: rgba(239,68,68,.14); }
+.dark .text-red-600, .dark .text-red-700 { color: #fca5a5; }
+.dark .bg-blue-100 { background-color: rgba(59,130,246,.18); }
+.dark .text-blue-700 { color: #93c5fd; }
+.dark .shadow-xl { box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.dark tr[class*="bg-green-50"] > td { background-color: rgba(34,197,94,.1); }
+.dark .bg-brand\/5, .dark .hover\:bg-brand\/5:hover { background-color: rgba(255,255,255,.05); }

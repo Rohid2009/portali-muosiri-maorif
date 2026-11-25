@@ -1,0 +1,21 @@
+# /etc/systemd/system/maorif.service — барои VPS ё сервери мактаб
+[Unit]
+Description=Портали муосири маориф (Next.js)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=maorif
+WorkingDirectory=/opt/maorif
+EnvironmentFile=/opt/maorif/.env
+Environment=NODE_ENV=production PORT=3000
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=3
+# Амният
+NoNewPrivileges=true
+ProtectSystem=full
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,488 @@
+// Портали муосири маориф — схемаи базаи маълумот
+// Ба провайдер вобаста нест: танҳо DATABASE_URL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  // Барои миграцияҳо (Neon: пайвасти мустақим, бе pooler). Дар VPS ҳамон DATABASE_URL.
+  directUrl = env("DIRECT_URL")
+}
+
+// ───────────────────────── Нақшҳо ва enum-ҳо ─────────────────────────
+
+enum Role {
+  DISTRICT_ADMIN // админи ноҳия: мактаб, мудир, мутахассис месозад
+  DIRECTOR       // мудир
+  SPECIALIST     // мутахассис (завуч)
+  TEACHER        // омӯзгор
+  PARENT         // волид
+}
+
+enum StudentStatus {
+  ACTIVE
+  ABROAD     // муваққатан дар хориҷа — дар журнал ҳаст, баҳо намегирад
+  EXPELLED
+  GRADUATED
+}
+
+enum YearResult {
+  PROMOTED   // ба синфи оянда гузашт
+  REPEATED   // бозмонд
+  EXPELLED   // хориҷ шуд
+  GRADUATED  // хатм кард
+}
+
+enum Attendance {
+  PRESENT  // ҳаст
+  ABSENT   // нест
+  EXCUSED  // набудани сабабнок (бо ҳуҷҷат тасдиқ мешавад)
+}
+
+enum Behavior {
+  EXEMPLARY       // намунавӣ
+  SATISFACTORY    // қаноатбахш
+  UNSATISFACTORY  // ғайриқаноатбахш
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PeriodKind {
+  Q1
+  Q2
+  Q3
+  Q4
+  EXAM
+  ANNUAL
+}
+
+// ───────────────────────── Мактаб ва танзимот ─────────────────────────
+
+model School {
+  id        Int      @id @default(autoincrement())
+  name      String
+  district  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  settings            SchoolSettings?
+  users               User[]
+  academicYears       AcademicYear[]
+  quarters            Quarter[]
+  subjects            Subject[]
+  classes             Class[]
+  students            Student[]
+  enrollments         ClassEnrollment[]
+  parentStudents      ParentStudent[]
+  linkRequests        ParentLinkRequest[]
+  conversations       Conversation[]
+  teachingAssignments TeachingAssignment[]
+  scheduleLessons     ScheduleLesson[]
+  journalEntries      JournalEntry[]
+  gradeCorrections    GradeCorrection[]
+  excuseDocuments     ExcuseDocument[]
+  periodGrades        PeriodGrade[]
+  auditLogs           AuditLog[]
+}
+
+model SchoolSettings {
+  schoolId                  Int     @id
+  school                    School  @relation(fields: [schoolId], references: [id])
+  parentMustChangePassword  Boolean @default(true)
+  maxLoginAttempts          Int     @default(5)
+  lockMinutes               Int     @default(15)
+  // Вазни имтиҳон дар баҳои солона (0 = ҳисоб намешавад, 50 = нисф)
+  examWeightPercent         Int     @default(0)
+  // Волидон худашон сабти ном карда метавонанд (бо тасдиқи мутахассис)
+  allowParentSignup         Boolean @default(true)
+}
+
+// ───────────────────────── Корбарон ва сессияҳо ─────────────────────────
+
+model User {
+  id                 Int       @id @default(autoincrement())
+  schoolId           Int?      // NULL танҳо барои DISTRICT_ADMIN
+  school             School?   @relation(fields: [schoolId], references: [id])
+  role               Role
+  fullName           String
+  login              String    @unique
+  phone              String?   @unique // "992901234567" — волид (сабти ном) ё омӯзгор (мутахассис/худаш)
+  phoneVisible       Boolean   @default(true) // дар рӯйхати тамос нишон дода шавад
+  passwordHash       String
+  mustChangePassword Boolean   @default(true)
+  failedAttempts     Int       @default(0)
+  lockedUntil        DateTime?
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+
+  sessions            Session[]
+  children            ParentStudent[]
+  teachingAssignments TeachingAssignment[]
+  scheduleLessons     ScheduleLesson[]
+  enteredEntries      JournalEntry[]       @relation("EnteredBy")
+  requestedCorrections GradeCorrection[]   @relation("RequestedBy")
+  reviewedCorrections  GradeCorrection[]   @relation("ReviewedBy")
+  reviewedExcuses      ExcuseDocument[]    @relation("ExcuseReviewedBy")
+  auditLogs            AuditLog[]
+  linkRequests         ParentLinkRequest[] @relation("LinkParent")
+  reviewedLinks        ParentLinkRequest[] @relation("LinkReviewer")
+  chatsAsTeacher       Conversation[]      @relation("ChatTeacher")
+  chatsAsParent        Conversation[]      @relation("ChatParent")
+  messages             Message[]
+
+  @@index([schoolId, role])
+}
+
+model Session {
+  id         String   @id // хеши SHA-256-и токен; худи токен танҳо дар cookie
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+  lastSeenAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// Барои rate limiting аз рӯи IP (дар serverless хотираи умумӣ нест)
+model LoginAttempt {
+  id        BigInt   @id @default(autoincrement())
+  ip        String
+  login     String
+  success   Boolean
+  createdAt DateTime @default(now())
+
+  @@index([ip, createdAt])
+}
+
+// ───────────────────────── Соли таҳсил, чоряк, фан, синф ─────────────────────────
+
+model AcademicYear {
+  id        Int      @id @default(autoincrement())
+  schoolId  Int
+  school    School   @relation(fields: [schoolId], references: [id])
+  name      String   // "2026-2027"
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+  isCurrent Boolean  @default(false)
+  isClosed  Boolean  @default(false)
+
+  quarters            Quarter[]
+  classes             Class[]
+  enrollments         ClassEnrollment[]
+  teachingAssignments TeachingAssignment[]
+  periodGrades        PeriodGrade[]
+
+  @@unique([schoolId, name])
+}
+
+model Quarter {
+  id             Int          @id @default(autoincrement())
+  schoolId       Int
+  school         School       @relation(fields: [schoolId], references: [id])
+  academicYearId Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  number         Int          // 1–4
+  startDate      DateTime     @db.Date
+  endDate        DateTime     @db.Date
+  isClosed       Boolean      @default(false)
+
+  @@unique([academicYearId, number])
+}
+
+model Subject {
+  id        Int    @id @default(autoincrement())
+  schoolId  Int
+  school    School @relation(fields: [schoolId], references: [id])
+  name      String
+  shortName String?
+
+  teachingAssignments TeachingAssignment[]
+  scheduleLessons     ScheduleLesson[]
+  journalEntries      JournalEntry[]
+  periodGrades        PeriodGrade[]
+
+  @@unique([schoolId, name])
+}
+
+model Class {
+  id             Int          @id @default(autoincrement())
+  schoolId       Int
+  school         School       @relation(fields: [schoolId], references: [id])
+  academicYearId Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  gradeLevel     Int          // 1–11
+  letter         String       // "А", "Б", ...
+  name           String       // "8-Г" (нормализатсияшуда)
+
+  enrollments         ClassEnrollment[]
+  teachingAssignments TeachingAssignment[]
+  scheduleLessons     ScheduleLesson[]
+  journalEntries      JournalEntry[]
+
+  @@unique([schoolId, academicYearId, name])
+}
+
+// ───────────────────────── Хонандагон ва волидон ─────────────────────────
+
+model Student {
+  id        Int           @id @default(autoincrement())
+  schoolId  Int
+  school    School        @relation(fields: [schoolId], references: [id])
+  fullName  String
+  gender    String?       // "M" | "F"
+  status    StudentStatus @default(ACTIVE)
+  createdAt DateTime      @default(now())
+
+  enrollments     ClassEnrollment[]
+  parents         ParentStudent[]
+  linkRequests    ParentLinkRequest[]
+  journalEntries  JournalEntry[]
+  excuseDocuments ExcuseDocument[]
+  periodGrades    PeriodGrade[]
+
+  @@index([schoolId, fullName])
+}
+
+// Таърихи синфҳои хонанда аз рӯи солҳо
+model ClassEnrollment {
+  id             Int          @id @default(autoincrement())
+  schoolId       Int
+  school         School       @relation(fields: [schoolId], references: [id])
+  studentId      Int
+  student        Student      @relation(fields: [studentId], references: [id])
+  classId        Int
+  class          Class        @relation(fields: [classId], references: [id])
+  academicYearId Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  yearResult     YearResult?
+
+  @@unique([studentId, academicYearId])
+  @@index([classId])
+}
+
+model ParentStudent {
+  parentUserId Int
+  parent       User    @relation(fields: [parentUserId], references: [id])
+  studentId    Int
+  student      Student @relation(fields: [studentId], references: [id])
+  schoolId     Int
+  school       School  @relation(fields: [schoolId], references: [id])
+
+  @@id([parentUserId, studentId])
+}
+
+// Волид фарзандро аз рӯйхат интихоб мекунад → дархост; танҳо баъди тасдиқи мутахассис
+// ParentStudent сохта мешавад ва волид баҳоҳоро мебинад (ҳимоя аз дидани кӯдаки бегона).
+model ParentLinkRequest {
+  id           Int           @id @default(autoincrement())
+  schoolId     Int
+  school       School        @relation(fields: [schoolId], references: [id])
+  parentUserId Int
+  parent       User          @relation("LinkParent", fields: [parentUserId], references: [id])
+  studentId    Int
+  student      Student       @relation(fields: [studentId], references: [id])
+  relation     String?       // "падар", "модар", "сарпараст"
+  status       RequestStatus @default(PENDING)
+  reviewedById Int?
+  reviewedBy   User?         @relation("LinkReviewer", fields: [reviewedById], references: [id])
+  reviewedAt   DateTime?
+  createdAt    DateTime      @default(now())
+
+  @@unique([parentUserId, studentId])
+  @@index([schoolId, status])
+}
+
+// ───────────────────────── Тақсимот ва ҷадвал ─────────────────────────
+
+// Бисёр-ба-бисёр: омӯзгор ↔ (синф, фан). Интиқол = activeTo гузоштан + сатри нав.
+// Ивазкунандаи муваққатӣ ҳам ҳамин ҷо (activeFrom/activeTo кӯтоҳ).
+model TeachingAssignment {
+  id             Int          @id @default(autoincrement())
+  schoolId       Int
+  school         School       @relation(fields: [schoolId], references: [id])
+  teacherId      Int
+  teacher        User         @relation(fields: [teacherId], references: [id])
+  classId        Int
+  class          Class        @relation(fields: [classId], references: [id])
+  subjectId      Int
+  subject        Subject      @relation(fields: [subjectId], references: [id])
+  academicYearId Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  activeFrom     DateTime     @db.Date
+  activeTo       DateTime?    @db.Date
+
+  @@index([teacherId, academicYearId])
+  @@index([classId, subjectId])
+}
+
+model ScheduleLesson {
+  id        Int     @id @default(autoincrement())
+  schoolId  Int
+  school    School  @relation(fields: [schoolId], references: [id])
+  classId   Int
+  class     Class   @relation(fields: [classId], references: [id])
+  subjectId Int
+  subject   Subject @relation(fields: [subjectId], references: [id])
+  teacherId Int
+  teacher   User    @relation(fields: [teacherId], references: [id])
+  weekday   Int     // 1 = душанбе … 6 = шанбе
+  lessonNo  Int     // 1, 2, 3 …
+  startTime String  // "08:00"
+  endTime   String  // "08:45"
+
+  @@unique([classId, weekday, lessonNo])
+  @@index([teacherId, weekday])
+}
+
+// ───────────────────────── Журнал ─────────────────────────
+
+// Баҳо ба (синф, фан) баста аст, на ба омӯзгор — ҳангоми интиқол журнал бо синф мемонад.
+model JournalEntry {
+  id         Int         @id @default(autoincrement())
+  schoolId   Int
+  school     School      @relation(fields: [schoolId], references: [id])
+  studentId  Int
+  student    Student     @relation(fields: [studentId], references: [id])
+  classId    Int
+  class      Class       @relation(fields: [classId], references: [id])
+  subjectId  Int
+  subject    Subject     @relation(fields: [subjectId], references: [id])
+  enteredById Int
+  enteredBy  User        @relation("EnteredBy", fields: [enteredById], references: [id])
+  lessonDate DateTime    @db.Date
+  lessonNo   Int
+  grade      Int?        // 1–10; агар ABSENT/EXCUSED бошад — ҳамеша NULL
+  attendance Attendance
+  behavior   Behavior?
+  createdAt  DateTime    @default(now())
+
+  corrections GradeCorrection[]
+
+  @@unique([studentId, subjectId, lessonDate, lessonNo])
+  @@index([classId, subjectId, lessonDate])
+}
+
+// Дархости тасҳеҳ: ё сатри мавҷударо иваз мекунад (journalEntryId),
+// ё сатри навро барои рӯзи гузашта илова мекунад (journalEntryId = NULL).
+model GradeCorrection {
+  id             Int           @id @default(autoincrement())
+  schoolId       Int
+  school         School        @relation(fields: [schoolId], references: [id])
+  journalEntryId Int?
+  journalEntry   JournalEntry? @relation(fields: [journalEntryId], references: [id])
+  studentId      Int
+  classId        Int
+  subjectId      Int
+  lessonDate     DateTime      @db.Date
+  lessonNo       Int
+  requestedById  Int
+  requestedBy    User          @relation("RequestedBy", fields: [requestedById], references: [id])
+  oldValue       Json?         // NULL — агар сатри нав бошад
+  newValue       Json          // { grade, attendance, behavior }
+  reason         String
+  status         RequestStatus @default(PENDING)
+  reviewedById   Int?
+  reviewedBy     User?         @relation("ReviewedBy", fields: [reviewedById], references: [id])
+  reviewedAt     DateTime?
+  createdAt      DateTime      @default(now())
+
+  @@index([schoolId, status])
+}
+
+model ExcuseDocument {
+  id           Int           @id @default(autoincrement())
+  schoolId     Int
+  school       School        @relation(fields: [schoolId], references: [id])
+  studentId    Int
+  student      Student       @relation(fields: [studentId], references: [id])
+  dateFrom     DateTime      @db.Date
+  dateTo       DateTime      @db.Date
+  fileKey      String?       // калиди файл дар нигоҳдории берунӣ (R2/Supabase Storage), на худи файл
+  note         String?
+  status       RequestStatus @default(PENDING)
+  reviewedById Int?
+  reviewedBy   User?         @relation("ExcuseReviewedBy", fields: [reviewedById], references: [id])
+  createdAt    DateTime      @default(now())
+}
+
+// Баҳоҳои чорякӣ/солона ҳангоми бастани давра сабт мешаванд (snapshot)
+model PeriodGrade {
+  id             Int          @id @default(autoincrement())
+  schoolId       Int
+  school         School       @relation(fields: [schoolId], references: [id])
+  studentId      Int
+  student        Student      @relation(fields: [studentId], references: [id])
+  subjectId      Int
+  subject        Subject      @relation(fields: [subjectId], references: [id])
+  academicYearId Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  kind           PeriodKind
+  value          Int?         // NULL = «бе баҳо»
+  computedAt     DateTime     @default(now())
+
+  @@unique([studentId, subjectId, academicYearId, kind])
+}
+
+// ───────────────────────── Сабти тағйирот ─────────────────────────
+
+// Танҳо INSERT. UPDATE/DELETE бо trigger манъ аст (prisma/sql/audit_log_append_only.sql).
+model AuditLog {
+  id        BigInt   @id @default(autoincrement())
+  schoolId  Int?
+  school    School?  @relation(fields: [schoolId], references: [id])
+  actorId   Int?
+  actor     User?    @relation(fields: [actorId], references: [id])
+  action    String   // "login", "grade.create", "password.change", ...
+  entity    String?
+  entityId  String?
+  details   Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([schoolId, createdAt])
+  @@index([actorId, createdAt])
+}
+
+// ───────────────────────── Чат: омӯзгор ↔ волид ─────────────────────────
+
+model Conversation {
+  id            Int       @id @default(autoincrement())
+  schoolId      Int
+  school        School    @relation(fields: [schoolId], references: [id])
+  teacherId     Int
+  teacher       User      @relation("ChatTeacher", fields: [teacherId], references: [id])
+  parentId      Int
+  parent        User      @relation("ChatParent", fields: [parentId], references: [id])
+  createdAt     DateTime  @default(now())
+  lastMessageAt DateTime?
+  lastSenderId  Int?
+  teacherReadAt DateTime?
+  parentReadAt  DateTime?
+
+  messages Message[]
+
+  @@unique([teacherId, parentId])
+  @@index([teacherId, lastMessageAt])
+  @@index([parentId, lastMessageAt])
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       Int
+  sender         User         @relation(fields: [senderId], references: [id])
+  body           String       // то 2000 аломат
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId, createdAt])
+  @@index([senderId, createdAt])
+}

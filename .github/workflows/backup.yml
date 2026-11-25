@@ -1,0 +1,81 @@
+# Нусхаи эҳтиётии ҳаррӯзаи база + санҷиши бозгардонӣ (restore) дар ҳар бор.
+# Нусха дар GitHub нигоҳ дошта мешавад (провайдери дигар, на дар ҷои база),
+# ва ихтиёрӣ ба Google Drive / Cloudflare R2 / ҳар ҷои дигар тавассути rclone.
+#
+# Secrets (Settings → Secrets and variables → Actions):
+#   DATABASE_URL       — пайвасти мустақими база (на pooler)
+#   BACKUP_PASSPHRASE  — рамзи қавӣ барои рамзгузории нусха (онро дар ҷои бехатар нигоҳ доред!)
+#   RCLONE_CONF        — (ихтиёрӣ) матни rclone.conf бо remote-и "backup"
+#
+# ⚠️ Репозиторий бояд PRIVATE бошад.
+
+name: backup
+
+on:
+  schedule:
+    - cron: '0 21 * * *'   # ҳар рӯз 02:00 бо вақти Душанбе
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      restoretest:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: restoretest
+        ports: ['5433:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    steps:
+      - name: Номи файл
+        run: echo "STAMP=$(date -u +%Y-%m-%d_%H%M)" >> "$GITHUB_ENV"
+
+      - name: pg_dump
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          docker run --rm --network host -v "$PWD:/out" -e DATABASE_URL postgres:17 \
+            sh -c 'pg_dump "$DATABASE_URL" -Fc --no-owner --no-privileges -f /out/maorif.dump'
+          ls -lh maorif.dump
+
+      - name: Санҷиши бозгардонӣ (restore) ба базаи муваққатӣ
+        run: |
+          docker run --rm --network host -v "$PWD:/out" -e PGPASSWORD=restoretest postgres:17 sh -c '
+            pg_restore -h localhost -p 5433 -U postgres -d postgres --no-owner --no-privileges /out/maorif.dump || true
+            USERS=$(psql -h localhost -p 5433 -U postgres -d postgres -tAc "select count(*) from \"User\"")
+            echo "Корбарон дар нусха: $USERS"
+            test "$USERS" -gt 0
+          '
+
+      - name: Рамзгузорӣ (AES-256)
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          test -n "$BACKUP_PASSPHRASE" || { echo "BACKUP_PASSPHRASE гузошта нашудааст"; exit 1; }
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$BACKUP_PASSPHRASE" \
+              --symmetric --cipher-algo AES256 -o "maorif-$STAMP.dump.gpg" maorif.dump
+          rm maorif.dump
+
+      - name: Нигоҳдорӣ дар GitHub (14 рӯз — ҳадди ақал 7 нусха)
+        uses: actions/upload-artifact@v4
+        with:
+          name: maorif-${{ env.STAMP }}
+          path: maorif-${{ env.STAMP }}.dump.gpg
+          retention-days: 14
+
+      - name: Нусха ба ҷои беруна (rclone, ихтиёрӣ)
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        if: env.RCLONE_CONF != ''
+        run: |
+          curl -fsSL https://rclone.org/install.sh | sudo bash
+          mkdir -p ~/.config/rclone && printf '%s' "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
+          rclone copy "maorif-$STAMP.dump.gpg" backup:maorif-backups/
+          # нусхаҳои аз 60 рӯз кӯҳна нест мешаванд (ҳамеша > 7 нусха мемонад)
+          rclone delete backup:maorif-backups/ --min-age 60d
