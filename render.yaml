@@ -30,9 +30,11 @@ services:
         value: Мудири мактаб
       - key: SEED_SPECIALIST
         value: "0"
+      # ⚠️ Махфӣ: репозиторий бояд PRIVATE бимонад. Пароли базаро дар Supabase иваз карда,
+      # ин ҷо ва дар Render → Environment навсозӣ кардан мумкин аст.
       - key: DATABASE_URL         # Supabase, transaction pooler (6543)
-        sync: false
+        value: "postgresql://maorif_app.bdzbtiyttuekcehgbgqf:149f90949f95468438942f52268fddf12fd9f13434f0426f@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=5&schema=maorif&sslmode=require"
       - key: DIRECT_URL           # Supabase, session pooler (5432)
-        sync: false
-      - key: SEED_DIRECTOR_PASSWORD
-        sync: false
+        value: "postgresql://maorif_app.bdzbtiyttuekcehgbgqf:149f90949f95468438942f52268fddf12fd9f13434f0426f@aws-0-eu-central-1.pooler.supabase.com:5432/postgres?schema=maorif&sslmode=require"
+      - key: SEED_DIRECTOR_PASSWORD   # пароли муваққатӣ; дар воридшавии аввал иваз мешавад
+        value: "Mudir-e84a31"
