@@ -1,5 +1,23 @@
 # Ҷойгиркунӣ, бэкап ва гузариш
 
+## ★ Ҳозира: Supabase (база) + Render (сайт) — бе корти бонкӣ
+
+- **База:** Supabase, лоиҳаи `portali-maorif-mtmu12` (Frankfurt, `eu-central-1`).
+  Ҷадвалҳо дар схемаи алоҳидаи **`maorif`** ҳастанд ва барномаи нақши худашро дорад
+  (`maorif_app`). API-и оммавии Supabase (anon key) ба ин схема дастрасӣ надорад.
+- **Сайт:** Render, аз рӯи `render.yaml` (Blueprint). Ҳар push ба `main` → deploy-и худкор:
+  `prisma migrate deploy` → `db:harden` → `db:seed` → `next build`.
+- **Миграцияҳо:** schema.prisma-ро иваз кунед ва push кунед — `.github/workflows/migrations.yml`
+  миграцияи навро худаш месозад, дар базаи холӣ месанҷад ва commit мекунад.
+- **Keepalive:** `.github/workflows/keepalive.yml` дар соатҳои дарс ҳар 14 дақ. `/api/health`-ро
+  мекушояд (Render хоб наравад; Supabase фаъол монад). Variables → `SITE_URL` гузоред.
+- **Бэкап:** Supabase-и ройгон бэкап намекунад. `backup.yml`-ро фаъол кунед:
+  Variables `BACKUP_ENABLED=true`, `DB_SCHEMA=maorif`; Secrets `DATABASE_URL` (= DIRECT_URL),
+  `BACKUP_PASSPHRASE`.
+
+Маҳдудиятҳо: база 500 MB; Render-и ройгон баъди 15 дақ. бекорӣ хоб меравад (бедоршавӣ ≈ 1 дақ.);
+Supabase лоиҳаро баъди 1 ҳафтаи бекорӣ қатъ мекунад (keepalive инро пешгирӣ мекунад).
+
 ## ★ Тавсияшуда: Oracle Cloud Always Free (насби худкор)
 
 Сервери пурра (2 OCPU ARM, 12 GB хотира, 200 GB диск), хоб намеравад, база дар худи сервер.
