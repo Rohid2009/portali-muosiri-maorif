@@ -1,6 +1,6 @@
 # Сохтани APK-и «Журнали мактаб» (android/).
 # Натиҷа: GitHub → Releases (барои зеркашӣ аз телефон) ва шохаи `apk` (танҳо версияи охирин).
-# Суроғаи сайт: Settings → Secrets and variables → Actions → Variables → APP_URL.
+# Саҳифаҳо дар дохили APK (android/app/src/main/assets/app); сервер — Supabase Edge Function «api».
 name: android
 
 on:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      APP_URL: ${{ vars.APP_URL || 'https://portali-maorif.onrender.com' }}
+      APP_URL: 'Supabase (bdzbtiyttuekcehgbgqf)'
       VERSION_CODE: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v4

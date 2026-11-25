@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050d24">
+<title>Журнали мактаб — МТМУ №12</title>
+<style>
+:root{--bg:#050d24;--card:rgba(16,34,80,.62);--card2:rgba(255,255,255,.05);--ink:#eaf1ff;--mut:#9db0d4;--line:rgba(140,170,255,.16);
+--brand:#2a7bff;--brand2:#1a5de8;--acc:#5cc8ff;--sky:rgba(42,123,255,.16);--gold:#e9a822;--goldL:rgba(233,168,34,.14);
+--g9:#86efac;--g7:#93c5fd;--g5:#fcd34d;--g3:#fca5a5;--g9b:rgba(34,197,94,.16);--g7b:rgba(59,130,246,.18);--g5b:rgba(245,158,11,.16);--g3b:rgba(239,68,68,.16);
+--glass:rgba(255,255,255,.06);--glassB:rgba(140,170,255,.18);--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 22px rgba(0,0,0,.35)}
+*{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
+html{background:#050d24}
+body{margin:0;color:var(--ink);font:15.5px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;
+background:radial-gradient(900px 520px at 85% 0%,rgba(42,123,255,.26),transparent 60%),radial-gradient(800px 500px at -10% 95%,rgba(0,190,255,.10),transparent 60%),linear-gradient(180deg,#071637 0%,#050d24 55%,#040a1c 100%);background-attachment:fixed;padding-bottom:84px}
+a{color:inherit}button,input,select,textarea{font-family:inherit}
+svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hdr{max-width:1100px;margin:auto;padding:14px 16px 8px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0;flex:1}
+.brand .lg{width:44px;height:44px;flex:none;border-radius:13px;background:linear-gradient(135deg,#2f86ff,#1046c8);display:grid;place-items:center;box-shadow:0 6px 18px rgba(42,123,255,.45)}
+.brand .lg svg{width:26px;height:26px;color:#fff}
+.brand b{display:block;font-size:17px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);background:var(--glass);border:1px solid var(--glassB);flex:none}
+main{max-width:1100px;margin:auto;padding:10px 16px 30px}
+.ph{margin:6px 0 16px}.ph h1{font-size:clamp(22px,5vw,30px);line-height:1.15;margin:0;letter-spacing:-.02em}.ph p{margin:4px 0 0;color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.card h2{font-size:16.5px;margin:0 0 12px;display:flex;align-items:center;gap:8px}.card h2 .i{color:#8cc0ee}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:#fff;border:0;border-radius:12px;padding:11px 18px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;min-height:44px}
+.btn:active{background:var(--brand2)}.btn.full{width:100%;min-height:50px;font-size:16px}.btn.sm{min-height:36px;padding:6px 12px;font-size:13.5px;border-radius:10px}
+.btn.ghost{background:transparent;color:#8cc0ee;box-shadow:inset 0 0 0 1.5px rgba(92,200,255,.35)}.btn.red{background:#dc2626}.btn.green{background:#16a34a}
+.btn[disabled]{opacity:.55;pointer-events:none}
+input,select,textarea{font-size:16px;color:var(--ink);background:rgba(8,20,52,.7);border:1.5px solid var(--line);border-radius:11px;padding:10px 12px;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--brand);outline:3px solid rgba(42,123,255,.2)}
+select option{background:#0b1a40}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;margin-bottom:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.sp{flex:1}
+.mut{color:var(--mut);font-size:13.5px}
+.msg{border-radius:12px;padding:11px 14px;font-size:14px;margin:10px 0;display:flex;gap:10px;align-items:flex-start}
+.ok{background:var(--g9b);color:var(--g9)}.warn{background:var(--g5b);color:var(--g5)}.err{background:var(--g3b);color:var(--g3)}
+.note{background:var(--sky);color:#cfe2f5;border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:12px}
+.pw{position:relative;display:block}.pw input{padding-right:48px}
+.pw button{position:absolute;top:0;right:0;bottom:0;width:46px;border:0;background:none;color:var(--mut);cursor:pointer;display:grid;place-items:center}
+.gr{display:inline-grid;place-items:center;min-width:30px;height:30px;padding:0 6px;border-radius:9px;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.g9{color:var(--g9);background:var(--g9b)}.g7{color:var(--g7);background:var(--g7b)}.g5{color:var(--g5);background:var(--g5b)}.g3{color:var(--g3);background:var(--g3b)}.gn{color:var(--mut);background:var(--card2)}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600}
+.p-r{background:var(--g3b);color:var(--g3)}.p-a{background:var(--g5b);color:var(--g5)}.p-g{background:var(--g9b);color:var(--g9)}.p-b{background:var(--sky);color:#8cc0ee}
+.scroll{overflow-x:auto;margin:0 -18px;padding:0 18px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px}
+th{text-align:left;font-size:12px;color:var(--mut);font-weight:600;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:center}
+.av{width:36px;height:36px;border-radius:50%;background:var(--sky);color:#8cc0ee;font-weight:800;display:grid;place-items:center;font-size:13.5px;flex:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);text-decoration:none;display:block}
+.stat b{display:block;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}.stat span{font-size:13px;color:var(--mut)}
+.stat.alert{box-shadow:inset 0 0 0 2px var(--gold),var(--shadow)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.list{list-style:none;margin:0;padding:0}.list>li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}.list>li:last-child{border-bottom:0}
+.list .tx{flex:1;min-width:0}.list .tx b{display:block;overflow:hidden;text-overflow:ellipsis}.list .tx span{display:block;font-size:13px;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{display:flex;flex-direction:column;gap:4px;border:1.5px solid var(--line);border-radius:16px;padding:14px;text-decoration:none;background:var(--card2)}
+.tile:active{border-color:var(--brand);background:var(--sky)}.tile b{font-size:20px;line-height:1.15}.tile span{font-size:13px;color:var(--mut)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 12px;margin-bottom:4px}
+.chips a{flex:none;white-space:nowrap;text-decoration:none;padding:8px 14px;border-radius:99px;font-size:14px;color:var(--mut);background:var(--card2);border:1px solid var(--line)}
+.chips a.on{color:#fff;background:linear-gradient(135deg,#2f86ff,#1758e6);border-color:transparent}
+.badge{display:inline-grid;place-items:center;min-width:19px;height:19px;border-radius:99px;background:var(--gold);color:#3b2800;font-size:11.5px;font-weight:800;padding:0 5px;margin-left:4px}
+/* навбари поён */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(5,13,36,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bnav .in{max-width:640px;margin:auto;display:flex;gap:4px}
+.bnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:14px;text-decoration:none;color:var(--mut);font-size:11.5px;font-weight:600;position:relative}
+.bnav a svg{width:23px;height:23px}.bnav a.on{color:#fff;background:var(--sky)}
+.bnav a .badge{position:absolute;top:0;right:calc(50% - 22px)}
+/* асосӣ */
+.hero{text-align:center;padding:24px 4px 6px}
+.hero .big{width:96px;height:96px;border-radius:28px;margin:0 auto 16px;background:linear-gradient(135deg,#2f86ff,#0b3fb0);display:grid;place-items:center;box-shadow:0 14px 40px rgba(42,123,255,.5)}
+.hero .big svg{width:58px;height:58px;color:#fff}
+.hero h1{font-size:clamp(26px,7vw,40px);line-height:1.08;margin:0;font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#22c4ff,#3b8bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#c8d6f0;margin:12px auto 0;max-width:30em}
+.roles{display:flex;flex-direction:column;gap:12px;max-width:480px;margin:22px auto 0}
+.role{display:flex;align-items:center;gap:14px;border-radius:18px;padding:14px 16px;text-decoration:none;color:#0f1b2d;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(228,236,255,.92));box-shadow:0 10px 30px rgba(3,12,40,.35)}
+.role .ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}.role .ic svg{width:24px;height:24px}
+.role b{display:block;font-size:17px}.role span{display:block;font-size:13.5px;color:#46546b}
+.c-blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}.c-purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}.c-green{background:linear-gradient(135deg,#22c55e,#15803d)}
+.loginbox{max-width:420px;margin:10px auto}
+/* журнал */
+.att{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;flex:none}
+.att button{padding:7px 10px;font-size:13px;font-weight:700;border:0;border-left:1.5px solid var(--line);background:none;color:var(--mut);cursor:pointer;min-width:34px}
+.att button:first-child{border-left:0}.att button.P.on{background:var(--g9b);color:var(--g9)}.att button.A.on{background:var(--g3b);color:var(--g3)}.att button.E.on{background:var(--g5b);color:var(--g5)}
+.jrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.jrow .nm{flex:1 1 150px;font-weight:600}.jrow select{width:72px;padding:7px 8px;font-weight:700}
+.jrow.locked{opacity:.75}
+.grid td.c{text-align:center;padding:4px;min-width:34px}
+.grid th.d{font-size:11px;text-align:center;padding:6px 3px}
+.sticky{position:sticky;left:0;background:#0b1a44;z-index:1}
+/* чат */
+.thread{display:flex;flex-direction:column;gap:6px;padding:4px 0 12px;min-height:40vh}
+.bub{max-width:80%;padding:8px 12px 6px;border-radius:16px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;display:flex;flex-direction:column}
+.bub.me{align-self:flex-end;background:var(--brand);color:#fff;border-bottom-right-radius:6px}
+.bub.th{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:6px}
+.bub small{align-self:flex-end;font-size:11px;opacity:.75;margin-top:2px}
+.daysep{align-self:center;font-size:12px;color:var(--mut);background:var(--card2);border-radius:99px;padding:2px 10px;margin:6px 0}
+.compose{position:sticky;bottom:84px;display:flex;gap:8px;align-items:flex-end;background:rgba(5,13,36,.92);padding:10px 0;border-top:1px solid var(--line)}
+.compose textarea{flex:1;resize:none;min-height:46px;max-height:140px;border-radius:16px}
+.sendb{width:48px;height:48px;border-radius:50%;border:0;background:var(--brand);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+/* дигар */
+.cb{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:9px 11px;font-size:14px;cursor:pointer;background:var(--card2)}
+.cb input{width:18px;height:18px;accent-color:#2a7bff;flex:none}
+.cb:has(input:checked){border-color:var(--brand);background:var(--sky)}
+.kids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.slip{border:2px dashed var(--gold);background:var(--goldL);border-radius:14px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+.slip code{font-size:16px;font-weight:800;color:#fff;user-select:all}
+.qgrid{display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
+.subj{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.subj:last-child{border-bottom:0}.subj .gs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px}
+.dcard{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:8px;background:var(--card2)}
+.dcard .tx{flex:1;min-width:0}.dcard .tx b{display:block}.dcard .tx span{display:block;font-size:13px;color:var(--mut)}
+.tel{background:var(--g9b);color:var(--g9);border-radius:10px;padding:7px 10px;font-weight:700;font-size:13.5px;text-decoration:none;white-space:nowrap}
+.empty{text-align:center;color:var(--mut);padding:26px 10px}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:sp 0.8s linear infinite;margin:40px auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;z-index:50;box-shadow:var(--shadow);max-width:90vw}
+.toast.e{background:#dc2626}
+.ed{background:var(--card2);border:1.5px solid var(--brand);border-radius:14px;padding:12px;margin:8px 0}
+details summary{cursor:pointer;font-weight:600;color:#8cc0ee;padding:6px 0}
+@media print{.bnav,.hdr,.chips,.noprint{display:none!important}body{background:#fff;color:#000;padding:0}.card{box-shadow:none;border:1px solid #ccc;background:#fff}th,td{color:#000}}
+</style>
+</head>
+<body>
+<header class="hdr" id="hdr"></header>
+<main id="app"><div class="spin"></div></main>
+<nav class="bnav" id="bnav" hidden></nav>
+<script>
+'use strict';
+const API = 'https://bdzbtiyttuekcehgbgqf.supabase.co/functions/v1/api';
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} } };
+let TOKEN = store.get('maorif-token');
+let ME = null;       // { user, school, today, year, quarters, quarter, unread, pending }
+let pollTimer = null;
+
+const I = {
+  logo: '<path d="M4 6.5c2.8-1.2 5.5-1.2 8 .5 2.5-1.7 5.2-1.7 8-.5V19c-2.8-1.2-5.5-1.2-8 .5-2.5-1.7-5.2-1.7-8-.5z"/><path d="M12 7v12.5"/><path d="M8.5 4.2 12 2.5l3.5 1.7L12 6z"/>',
+  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 15c2 .7 3.2 2.3 3.8 5"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/>', key: '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M14 9l2 2"/>',
+  book: '<path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v14"/>', phone: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/>',
+  out: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>', eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  send: '<path d="m4 12 16-8-6 16-2-7z"/>', back: '<path d="M15 5l-7 7 7 7"/>', grid: '<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+  case: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5h8v2M3 13h18"/>', plus: '<path d="M12 5v14M5 12h14"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', print: '<path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z"/>',
+};
+const ic = (n, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[n] || ''}</svg>`;
+
+// ───── ёрирасонҳо ─────
+async function api(action, body = {}) {
+  const headers = { 'content-type': 'application/json' };
+  if (TOKEN) headers['x-session'] = TOKEN;
+  let r;
+  try {
+    r = await fetch(API, { method: 'POST', headers, body: JSON.stringify({ action, ...body }) });
+  } catch {
+    throw new Error('Пайваст ба сервер нашуд. Интернетро санҷед.');
+  }
+  let j = null;
+  try { j = await r.json(); } catch {}
+  if (r.status === 401 && TOKEN) { setToken(null); ME = null; location.hash = '#/'; }
+  if (!j || !j.ok) throw new Error((j && j.error) || 'Хатои сервер');
+  return j.data;
+}
+function setToken(t) { TOKEN = t; store.set('maorif-token', t); }
+function toast(t, isErr) {
+  const d = document.createElement('div'); d.className = 'toast' + (isErr ? ' e' : ''); d.textContent = t; document.body.appendChild(d);
+  setTimeout(() => d.remove(), isErr ? 4200 : 2600);
+}
+const gcls = (g) => (g == null ? 'gn' : g >= 9 ? 'g9' : g >= 7 ? 'g7' : g >= 5 ? 'g5' : 'g3');
+const gchip = (g) => `<span class="gr ${gcls(g)}">${g == null ? '—' : g}</span>`;
+function roundGrade(v) { const f = Math.round(v * 100) / 100; const w = Math.floor(f); return f - w >= 0.5 ? w + 1 : w; }
+function qGrade(arr) { const v = arr.filter((g) => Number.isInteger(g) && g >= 1 && g <= 10); return v.length ? roundGrade(v.reduce((a, b) => a + b, 0) / v.length) : null; }
+const MON = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+const fdate = (iso) => { if (!iso) return ''; const [y, m, d] = iso.slice(0, 10).split('-'); return `${+d} ${MON[+m - 1]}`; };
+const ftime = (ts) => { const d = new Date(ts); return d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Dushanbe' }); };
+const fday = (ts) => new Date(ts).toLocaleDateString('en-CA', { timeZone: 'Asia/Dushanbe' });
+const fphone = (p) => (p && p.length === 12 ? `+${p.slice(0, 3)} ${p.slice(3, 5)} ${p.slice(5, 8)} ${p.slice(8)}` : p || '');
+const initials = (n) => String(n || '?').split(/\s+/).slice(0, 2).map((x) => x[0]).join('').toUpperCase();
+const ATT_TJ = { PRESENT: 'Ҳозир', ABSENT: 'Ғоиб', EXCUSED: 'Сабабнок' };
+const BEH_TJ = { EXEMPLARY: 'Намунавӣ', SATISFACTORY: 'Қаноатбахш', UNSATISFACTORY: 'Ғайриқаноатбахш' };
+const STATUS_TJ = { ACTIVE: 'Фаъол', ABROAD: 'Дар хориҷа', EXPELLED: 'Хориҷ шуд', GRADUATED: 'Хатм кард' };
+const pwField = (name, ph = '', auto = 'current-password') => `<span class="pw"><input type="password" name="${name}" placeholder="${esc(ph)}" autocomplete="${auto}" required><button type="button" data-eye aria-label="Паролро нишон додан">${ic('eye')}</button></span>`;
+const fd = (form) => Object.fromEntries(new FormData(form).entries());
+function busy(btn, on) { if (!btn) return; btn.disabled = on; if (on) { btn.dataset.t = btn.innerHTML; btn.textContent = 'Интизор шавед…'; } else if (btn.dataset.t) btn.innerHTML = btn.dataset.t; }
+function slip(c) { return c ? `<div class="slip"><b>Маълумоти воридшавӣ</b> — нусха гиред ва ба соҳибаш диҳед:<br>Логин: <code>${esc(c.login)}</code><br>Парол: <code>${esc(c.password)}</code><div class="mut">Дар воридшавии аввал парол иваз карда мешавад. Ин парол дигар нишон дода намешавад.</div></div>` : ''; }
+
+document.addEventListener('click', (e) => {
+  const eye = e.target.closest('[data-eye]');
+  if (eye) { const inp = eye.parentElement.querySelector('input'); inp.type = inp.type === 'password' ? 'text' : 'password'; }
+});
+
+// ───── сарлавҳа ва навбар ─────
+function header() {
+  const s = ME?.school?.name || 'МТМУ №12';
+  $('#hdr').innerHTML = `<a class="brand" href="#/"><span class="lg">${ic('logo')}</span><span><b>Журнали электронӣ</b><small>${esc(s)} · ${esc(ME?.school?.district || 'Зафаробод')}</small></span></a>
+    ${ME ? `<a class="hbtn" href="#/account" aria-label="Логин ва парол">${ic('key')}</a><button class="hbtn" id="logout" aria-label="Баромад">${ic('out')}</button>` : ''}`;
+  const lo = $('#logout');
+  if (lo) lo.onclick = async () => { if (!confirmLeave()) return; try { await api('logout'); } catch {} setToken(null); ME = null; location.hash = '#/'; };
+}
+function confirmLeave() { return true; }
+const NAV = {
+  TEACHER: [['#/t', 'home', 'Синфҳо'], ['#/dir', 'users', 'Волидон'], ['#/chat', 'chat', 'Чат'], ['#/account', 'key', 'Ҳисоб']],
+  PARENT: [['#/p', 'home', 'Фарзандон'], ['#/dir', 'users', 'Омӯзгорон'], ['#/chat', 'chat', 'Чат'], ['#/account', 'key', 'Ҳисоб']],
+  SPECIALIST: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/classes', 'grid', 'Синфҳо'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/s/more', 'users', 'Дигар']],
+  DIRECTOR: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/d/audit', 'book', 'Аудит'], ['#/s/more', 'users', 'Дигар']],
+};
+function bnav(path) {
+  const n = $('#bnav');
+  if (!ME || ME.user.mustChangePassword) { n.hidden = true; return; }
+  const items = NAV[ME.user.role] || [];
+  n.hidden = false;
+  n.innerHTML = `<div class="in">${items.map(([h, i, t]) => {
+    const on = path === h.slice(1) || (h !== '#/s' && h !== '#/t' && h !== '#/p' && path.startsWith(h.slice(1))) || (h.slice(1) === '/s' && (path === '/s' || path.startsWith('/s/req'))) ;
+    const badge = h === '#/chat' && ME.unread ? `<span class="badge">${ME.unread}</span>` : h === '#/s' && ME.pending ? `<span class="badge">${ME.pending}</span>` : '';
+    return `<a href="${h}" class="${on ? 'on' : ''}">${ic(i)}<span>${t}</span>${badge}</a>`;
+  }).join('')}</div>`;
+}
+
+// ───── роутер ─────
+const ROUTES = [];
+const route = (re, fn, opts = {}) => ROUTES.push({ re, fn, ...opts });
+async function render() {
+  clearInterval(pollTimer); pollTimer = null;
+  const path = (location.hash || '#/').slice(1) || '/';
+  const app = $('#app');
+  if (TOKEN && !ME) {
+    try { ME = await api('me'); } catch (e) { if (!TOKEN) { ME = null; } else { app.innerHTML = errBox(e.message, true); header(); return; } }
+  }
+  header();
+  if (ME && ME.user.mustChangePassword && path !== '/account') { location.hash = '#/account'; return; }
+  for (const r of ROUTES) {
+    const m = path.match(r.re);
+    if (!m) continue;
+    if (r.auth && !ME) { location.hash = '#/'; return; }
+    if (r.roles && !r.roles.includes(ME.user.role)) { location.hash = homeOf(); return; }
+    bnav(path);
+    app.innerHTML = '<div class="spin"></div>';
+    try { await r.fn(app, ...m.slice(1)); } catch (e) { app.innerHTML = errBox(e.message); }
+    window.scrollTo(0, 0);
+    return;
+  }
+  location.hash = '#/';
+}
+function homeOf() { return ME ? { TEACHER: '#/t', PARENT: '#/p', SPECIALIST: '#/s', DIRECTOR: '#/s' }[ME.user.role] || '#/' : '#/'; }
+function errBox(m, retry) { return `<div class="card"><div class="msg err">${esc(m)}</div>${retry ? '<button class="btn" onclick="location.reload()">Боз кӯшиш</button>' : ''}</div>`; }
+async function refreshMe() { try { ME = await api('me'); } catch {} }
+window.addEventListener('hashchange', render);
+
+// ───── саҳифаи асосӣ ва воридшавӣ ─────
+route(/^\/$/, async (app) => {
+  if (ME) { location.hash = homeOf(); return; }
+  bnav('/');
+  let meta = null; try { meta = await api('meta'); } catch {}
+  app.innerHTML = `<section class="hero">
+    <div class="big">${ic('logo')}</div>
+    <h1>Журнали электронии<br><em>мактаб</em></h1>
+    <p>${esc(meta?.school?.name || 'МТМУ №12')} · ноҳияи ${esc(meta?.school?.district || 'Зафаробод')}. Баҳо, давомот ва алоқа бо омӯзгорон — дар як ҷой.</p>
+  </section>
+  <div class="roles">
+    <a class="role" href="#/login/teacher"><span class="ic c-blue">${ic('case')}</span><span><b>Омӯзгор</b><span>Журнал, баҳо ва давомот</span></span></a>
+    <a class="role" href="#/login/parent"><span class="ic c-purple">${ic('users')}</span><span><b>Волид</b><span>Баҳои фарзанд ва чат бо омӯзгор</span></span></a>
+    <a class="role" href="#/login/staff"><span class="ic c-green">${ic('grid')}</span><span><b>Мутахассис / Мудир</b><span>Идораи мактаб ва ҳисобот</span></span></a>
+  </div>
+  ${meta && !meta.ready ? '<div class="card" style="margin-top:20px"><div class="msg warn">Портал ҳанӯз танзим нашудааст.</div></div>' : ''}`;
+});
+
+route(/^\/login\/(teacher|parent|staff)$/, async (app, who) => {
+  if (ME) { location.hash = homeOf(); return; }
+  const T = { teacher: ['Воридшавии омӯзгор', 'Логин ва паролеро, ки мутахассис додааст, нависед.'], parent: ['Воридшавии волид', 'Рақами телефон (ё логин) ва пароли худро нависед.'], staff: ['Мутахассис ва мудир', 'Логин ва пароли худро нависед.'] }[who];
+  app.innerHTML = `<div class="loginbox"><a class="btn ghost sm" href="#/">${ic('back')} Ба қафо</a>
+    <div class="ph"><h1>${T[0]}</h1><p>${T[1]}</p></div>
+    <form class="card" id="f">
+      <label class="f">${who === 'parent' ? 'Рақами телефон ё логин' : 'Логин'}<input name="login" autocomplete="username" autocapitalize="none" required ${who === 'parent' ? 'inputmode="tel"' : ''}></label>
+      <label class="f">Парол${pwField('password')}</label>
+      <div id="m"></div>
+      <button class="btn full">Ворид шудан</button>
+    </form>
+    ${who === 'parent' ? `<div class="card"><b>Ҳисоб надоред?</b><p class="mut">Бо рақами телефон сабти ном шавед ва фарзанди худро аз рӯйхат интихоб кунед.</p><a class="btn ghost full" href="#/register">Сабти номи волид</a></div>` : ''}</div>`;
+  $('#f').onsubmit = async (e) => {
+    e.preventDefault(); const b = e.submitter || $('#f button.btn'); busy(b, true); $('#m').innerHTML = '';
+    try {
+      const r = await api('login', fd(e.target));
+      setToken(r.token); ME = null; await refreshMe();
+      location.hash = ME.user.mustChangePassword ? '#/account' : homeOf();
+    } catch (err) { $('#m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+});
+
+route(/^\/register$/, async (app) => {
+  const o = await api('signupOptions');
+  if (!o.allowed) { app.innerHTML = errBox('Сабти номи волидон ҳоло баста аст. Ба мутахассиси мактаб муроҷиат кунед.'); return; }
+  const picked = new Set();
+  app.innerHTML = `<div class="loginbox" style="max-width:560px"><a class="btn ghost sm" href="#/login/parent">${ic('back')} Ба қафо</a>
+    <div class="ph"><h1>Сабти номи волид</h1><p>Баъди тасдиқи мутахассис баҳои фарзандатонро мебинед.</p></div>
+    <form class="card" id="f">
+      <label class="f">Ному насаб<input name="fullName" autocomplete="name" required placeholder="Масалан: Боқиев Ҷамшед"></label>
+      <label class="f">Рақами телефон<input name="phone" inputmode="tel" autocomplete="tel" required placeholder="90 123 4567"></label>
+      <label class="f">Кӣ ҳастед?<select name="relation"><option value="падар">Падар</option><option value="модар">Модар</option><option value="сарпараст">Сарпараст</option></select></label>
+      <label class="f">Парол (камаш 8 аломат, ҳарф ва рақам)${pwField('password', '', 'new-password')}</label>
+      <label class="f">Синфи фарзанд<select id="cls"><option value="">— интихоб кунед —</option>${o.classes.map((c) => `<option value="${c.classId}">${esc(c.name)}</option>`).join('')}</select></label>
+      <div id="kids"></div>
+      <div class="mut" id="cnt" style="margin:8px 0">Фарзанд интихоб нашудааст.</div>
+      <div id="m"></div>
+      <button class="btn full">Сабти ном</button>
+    </form></div>`;
+  const draw = () => {
+    const c = o.classes.find((x) => String(x.classId) === $('#cls').value);
+    $('#kids').innerHTML = c ? `<div class="kids">${c.students.map((s) => `<label class="cb"><input type="checkbox" value="${s.id}" ${picked.has(s.id) ? 'checked' : ''}>${esc(s.name)}</label>`).join('')}</div>` : '';
+    $('#kids').querySelectorAll('input').forEach((i) => (i.onchange = () => { i.checked ? picked.add(+i.value) : picked.delete(+i.value); $('#cnt').textContent = picked.size ? `Интихоб шуд: ${picked.size} нафар` : 'Фарзанд интихоб нашудааст.'; }));
+  };
+  $('#cls').onchange = draw;
+  $('#f').onsubmit = async (e) => {
+    e.preventDefault(); const b = $('#f button.btn'); busy(b, true); $('#m').innerHTML = '';
+    try {
+      const r = await api('register', { ...fd(e.target), studentIds: [...picked] });
+      setToken(r.token); ME = null; await refreshMe(); toast('Сабти ном шуд!'); location.hash = '#/p';
+    } catch (err) { $('#m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+});
+
+// ───── ҳисоб: парол, логин, телефон ─────
+route(/^\/account$/, async (app) => {
+  const u = ME.user;
+  app.innerHTML = `<div class="ph"><h1>Логин ва парол</h1><p>${esc(u.fullName)} · ${esc(u.roleTj)}</p></div>
+    ${u.mustChangePassword ? '<div class="msg warn">Барои идома аввал пароли муваққатиро ба пароли худ иваз кунед.</div>' : ''}
+    <form class="card" id="pf"><h2>${ic('key')} Иваз кардани парол</h2>
+      <label class="f">Пароли ҳозира${pwField('oldPassword')}</label>
+      <label class="f">Пароли нав (камаш 8 аломат, ҳарф ва рақам)${pwField('newPassword', '', 'new-password')}</label>
+      <label class="f">Пароли навро такрор кунед${pwField('again', '', 'new-password')}</label>
+      <div id="pm"></div><button class="btn">Нигоҳ доштан</button></form>
+    ${u.mustChangePassword ? '' : `
+    <form class="card" id="lf"><h2>${ic('user')} Иваз кардани логин</h2>
+      <p class="mut">Логини ҳозира: <b>${esc(u.login)}</b></p>
+      <label class="f">Логини нав (ҳарфҳои лотинӣ ва рақам)<input name="login" autocapitalize="none" required></label>
+      <label class="f">Пароли ҳозира (барои тасдиқ)${pwField('password')}</label>
+      <div id="lm"></div><button class="btn">Иваз кардан</button></form>
+    <form class="card" id="cf"><h2>${ic('phone')} Телефон барои тамос</h2>
+      <label class="f">Рақами телефон<input name="phone" inputmode="tel" value="${esc(fphone(u.phone))}" placeholder="90 123 4567"></label>
+      <label class="cb" style="margin-bottom:12px"><input type="checkbox" name="vis" ${u.phoneVisible ? 'checked' : ''}>Рақамам дар рӯйхати тамос нишон дода шавад</label>
+      <div id="cm"></div><button class="btn">Нигоҳ доштан</button></form>`}`;
+  $('#pf').onsubmit = async (e) => {
+    e.preventDefault(); const v = fd(e.target); const b = e.target.querySelector('.btn');
+    if (v.newPassword !== v.again) { $('#pm').innerHTML = '<div class="msg err">Паролҳои нав якхела нестанд.</div>'; return; }
+    busy(b, true);
+    try { await api('changePassword', v); await refreshMe(); toast('Парол иваз шуд'); e.target.reset(); if (u.mustChangePassword) location.hash = homeOf(); else render(); }
+    catch (err) { $('#pm').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+  if ($('#lf')) $('#lf').onsubmit = async (e) => {
+    e.preventDefault(); const b = e.target.querySelector('.btn'); busy(b, true);
+    try { await api('changeLogin', fd(e.target)); await refreshMe(); toast('Логин иваз шуд'); render(); }
+    catch (err) { $('#lm').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+  if ($('#cf')) $('#cf').onsubmit = async (e) => {
+    e.preventDefault(); const v = fd(e.target); const b = e.target.querySelector('.btn'); busy(b, true);
+    try { await api('updateContact', { phone: v.phone, phoneVisible: !!v.vis }); await refreshMe(); toast('Нигоҳ дошта шуд'); render(); }
+    catch (err) { $('#cm').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+}, { auth: true });
+
+// ───── омӯзгор ─────
+route(/^\/t$/, async (app) => {
+  const as = await api('t.assignments');
+  const q = ME.quarter;
+  app.innerHTML = `<div class="ph"><h1>Салом, ${esc(ME.user.fullName.split(' ')[1] || ME.user.fullName)}!</h1>
+    <p>Имрӯз ${fdate(ME.today)}${q ? ` · чоряки ${q.number}` : ' · таътил ё чоряк муқаррар нашудааст'}</p></div>
+    <div class="card"><h2>${ic('book')} Синф ва фанҳои ман</h2>
+    ${as.length ? `<div class="tiles">${as.map((a) => `<a class="tile" href="#/t/j/${a.id}"><b>${esc(a.className)}</b><span>${esc(a.subjectName)}</span><span>${a.students} хонанда${a.todayEntries ? ` · <span class="pill p-g">имрӯз ✓</span>` : ''}</span></a>`).join('')}</div>`
+      : '<div class="empty">Ҳоло ба шумо синф ё фан вобаста нашудааст. Ба мутахассис муроҷиат кунед.</div>'}</div>`;
+}, { auth: true, roles: ['TEACHER'] });
+
+route(/^\/t\/j\/(\d+)$/, async (app, id) => {
+  const d = await api('t.journal', { assignmentId: +id });
+  const a = d.assignment, q = d.quarter;
+  const todayRows = d.entries.filter((e) => e.date === d.today);
+  let lessonNo = Math.max(1, ...todayRows.map((e) => e.lessonNo), 1);
+  const state = {};
+  const viewQ = q || d.quarters[d.quarters.length - 1] || null;
+  const drawForm = () => {
+    const cur = new Map(d.entries.filter((e) => e.date === d.today && e.lessonNo === lessonNo).map((e) => [e.studentId, e]));
+    $('#jf').innerHTML = d.students.map((s) => {
+      const e = cur.get(s.id);
+      const st = state[s.id] || (state[s.id] = { att: e?.attendance || 'PRESENT', grade: e?.grade ?? '', beh: e?.behavior || '' });
+      const abroad = s.status === 'ABROAD';
+      const locked = !!e;
+      return `<div class="jrow ${locked ? 'locked' : ''}" data-s="${s.id}">
+        <span class="nm">${esc(s.fullName)}${abroad ? ' <span class="pill p-a">дар хориҷа</span>' : ''}${locked ? ' <span class="pill p-g">сабт шуд</span>' : ''}</span>
+        ${abroad ? '' : `<span class="att">${['PRESENT', 'ABSENT', 'EXCUSED'].map((k) => `<button type="button" class="${k[0]} ${st.att === k ? 'on' : ''}" data-att="${k}" ${locked ? 'disabled' : ''} title="${ATT_TJ[k]}">${{ PRESENT: 'Ҳ', ABSENT: 'Ғ', EXCUSED: 'С' }[k]}</button>`).join('')}</span>
+        <select data-g ${st.att !== 'PRESENT' || (locked && e.grade != null) ? 'disabled' : ''}><option value="">—</option>${[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((g) => `<option ${String(st.grade) === String(g) ? 'selected' : ''}>${g}</option>`).join('')}</select>`}
+      </div>`;
+    }).join('') || '<div class="empty">Дар синф хонанда нест.</div>';
+    $('#jf').querySelectorAll('.jrow').forEach((row) => {
+      const sid = +row.dataset.s;
+      row.querySelectorAll('[data-att]').forEach((b) => (b.onclick = () => { state[sid].att = b.dataset.att; if (b.dataset.att !== 'PRESENT') state[sid].grade = ''; drawForm(); }));
+      const sel = row.querySelector('[data-g]'); if (sel) sel.onchange = () => (state[sid].grade = sel.value);
+    });
+  };
+  const drawGrid = () => {
+    if (!viewQ) { $('#grid').innerHTML = '<div class="empty">Санаҳои чорякҳо муқаррар нашудаанд.</div>'; return; }
+    const es = d.entries.filter((e) => e.date >= viewQ.start && e.date <= viewQ.end);
+    const cols = [...new Set(es.map((e) => e.date + '#' + e.lessonNo))].sort();
+    const by = new Map(es.map((e) => [e.studentId + '|' + e.date + '#' + e.lessonNo, e]));
+    $('#grid').innerHTML = `<div class="scroll"><table class="grid"><thead><tr><th class="sticky">Хонанда</th>${cols.map((c) => `<th class="d">${fdate(c.split('#')[0])}</th>`).join('')}<th class="n">Чоряк</th></tr></thead><tbody>
+      ${d.students.map((s) => {
+        const gs = es.filter((e) => e.studentId === s.id && e.grade != null).map((e) => e.grade);
+        return `<tr><td class="sticky">${esc(s.fullName)}</td>${cols.map((c) => { const e = by.get(s.id + '|' + c); return `<td class="c">${!e ? '' : e.attendance === 'ABSENT' ? '<span class="gr g3">Ғ</span>' : e.attendance === 'EXCUSED' ? '<span class="gr g5">С</span>' : e.grade != null ? gchip(e.grade) : '<span class="mut">·</span>'}</td>`; }).join('')}<td class="n">${gchip(qGrade(gs))}</td></tr>`;
+      }).join('')}</tbody></table></div>${cols.length ? '' : '<div class="empty">Дар ин чоряк ҳанӯз сабт нест.</div>'}`;
+  };
+  app.innerHTML = `<a class="btn ghost sm noprint" href="#/t">${ic('back')} Синфҳо</a>
+    <div class="ph"><h1>${esc(a.className)} · ${esc(a.subjectName)}</h1><p>Имрӯз ${fdate(d.today)}${q ? ` · чоряки ${q.number}` : ''}</p></div>
+    ${q && !q.closed ? `<div class="card noprint"><h2>${ic('book')} Журнали имрӯза</h2>
+      <div class="note">Ҳ — ҳозир, Ғ — ғоиб, С — ғоиби сабабнок. Сабти нигоҳдошташуда иваз намешавад; танҳо ҷойи холӣ пур мешавад.</div>
+      <div class="row" style="margin-bottom:6px"><span class="mut">Дарси</span><select id="ln" style="width:90px">${[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `<option ${n === lessonNo ? 'selected' : ''}>${n}</option>`).join('')}</select><span class="mut">-ум</span></div>
+      <div id="jf"></div><div id="jm"></div>
+      <button class="btn full" id="save" style="margin-top:12px">Нигоҳ доштан</button></div>`
+      : `<div class="card"><div class="msg warn">${q ? 'Чоряк баста шудааст.' : 'Имрӯз ба ягон чоряк дохил намешавад — баҳо гузошта намешавад.'}</div></div>`}
+    <div class="card"><div class="row"><h2 class="sp" style="margin:0">${ic('chart')} Баҳоҳо${viewQ ? ` · чоряки ${viewQ.number}` : ''}</h2><button class="btn ghost sm noprint" onclick="print()">${ic('print')} Чоп</button></div><div id="grid" style="margin-top:10px"></div></div>`;
+  if ($('#jf')) {
+    drawForm();
+    $('#ln').onchange = () => { lessonNo = +$('#ln').value; for (const k in state) delete state[k]; drawForm(); };
+    $('#save').onclick = async (ev) => {
+      const b = ev.currentTarget; busy(b, true); $('#jm').innerHTML = '';
+      const rows = d.students.filter((s) => s.status === 'ACTIVE').map((s) => ({ studentId: s.id, attendance: state[s.id]?.att || 'PRESENT', grade: state[s.id]?.grade || null, mark: true }));
+      try {
+        const r = await api('t.save', { assignmentId: a.id, lessonNo, rows });
+        toast(`Нигоҳ дошта шуд: ${r.created} нав${r.filled ? `, ${r.filled} пур шуд` : ''}`);
+        if (r.skipped) $('#jm').innerHTML = `<div class="msg warn">${r.skipped} сабти пешина иваз нашуд — сабти нигоҳдошташударо танҳо мутахассис ислоҳ мекунад.</div>`;
+        const nd = await api('t.journal', { assignmentId: a.id }); d.entries = nd.entries; for (const k in state) delete state[k]; drawForm(); drawGrid();
+      } catch (err) { $('#jm').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; }
+      busy(b, false);
+    };
+  }
+  drawGrid();
+}, { auth: true, roles: ['TEACHER'] });
+
+// ───── волид ─────
+route(/^\/p$/, async (app) => {
+  const d = await api('p.children');
+  const ST = { PENDING: ['p-a', 'Интизори тасдиқ'], REJECTED: ['p-r', 'Рад шуд'] };
+  app.innerHTML = `<div class="ph"><h1>Фарзандони ман</h1><p>${esc(ME.user.fullName)}</p></div>
+    <div class="card">${d.children.length ? `<ul class="list">${d.children.map((c) => `<li><span class="av">${initials(c.fullName)}</span><span class="tx"><b>${esc(c.fullName)}</b><span>Синфи ${esc(c.className || '—')}</span></span><a class="btn sm" href="#/p/c/${c.id}">Баҳоҳо</a></li>`).join('')}</ul>`
+      : '<div class="empty">Ҳоло фарзанд пайваст нашудааст. Баъди тасдиқи мутахассис инҷо пайдо мешавад.</div>'}</div>
+    ${d.requests.length ? `<div class="card"><h2>Дархостҳо</h2><ul class="list">${d.requests.map((r) => `<li><span class="tx"><b>${esc(r.name)}</b></span><span class="pill ${ST[r.status][0]}">${ST[r.status][1]}</span></li>`).join('')}</ul></div>` : ''}
+    <a class="btn ghost full" href="#/p/add">${ic('plus')} Фарзанди дигарро илова кардан</a>`;
+}, { auth: true, roles: ['PARENT'] });
+
+route(/^\/p\/add$/, async (app) => {
+  const o = await api('signupOptions');
+  const picked = new Set();
+  app.innerHTML = `<a class="btn ghost sm" href="#/p">${ic('back')} Ба қафо</a><div class="ph"><h1>Илова кардани фарзанд</h1><p>Дархост ба мутахассис меравад.</p></div>
+    <div class="card"><label class="f">Синф<select id="cls"><option value="">— интихоб кунед —</option>${o.classes.map((c) => `<option value="${c.classId}">${esc(c.name)}</option>`).join('')}</select></label>
+    <div id="kids"></div><div id="m"></div><button class="btn full" id="go" style="margin-top:12px">Фиристодан</button></div>`;
+  $('#cls').onchange = () => {
+    const c = o.classes.find((x) => String(x.classId) === $('#cls').value);
+    $('#kids').innerHTML = c ? `<div class="kids">${c.students.map((s) => `<label class="cb"><input type="checkbox" value="${s.id}" ${picked.has(s.id) ? 'checked' : ''}>${esc(s.name)}</label>`).join('')}</div>` : '';
+    $('#kids').querySelectorAll('input').forEach((i) => (i.onchange = () => (i.checked ? picked.add(+i.value) : picked.delete(+i.value))));
+  };
+  $('#go').onclick = async (e) => {
+    const b = e.currentTarget; busy(b, true);
+    try { await api('p.requestChildren', { studentIds: [...picked] }); toast('Дархост фиристода шуд'); location.hash = '#/p'; }
+    catch (err) { $('#m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  };
+}, { auth: true, roles: ['PARENT'] });
+
+route(/^\/p\/c\/(\d+)$/, async (app, id) => {
+  const d = await api('p.child', { studentId: +id });
+  const qs = d.quarters, cur = d.quarter || qs[qs.length - 1];
+  let sel = cur ? cur.number : 0;
+  const draw = () => {
+    const q = qs.find((x) => x.number === sel);
+    const inQ = (e) => q && e.date >= q.start && e.date <= q.end;
+    const es = d.entries.filter(inQ);
+    const att = { P: es.filter((e) => e.attendance === 'PRESENT').length, A: es.filter((e) => e.attendance === 'ABSENT').length, E: es.filter((e) => e.attendance === 'EXCUSED').length };
+    const tot = att.P + att.A + att.E;
+    $('#body').innerHTML = `
+      <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="stat"><b>${qGrade(es.filter((e) => e.grade != null).map((e) => e.grade)) ?? '—'}</b><span>Миёнаи чоряк</span></div>
+      <div class="stat"><b>${tot ? Math.round((att.P / tot) * 100) + '%' : '—'}</b><span>Давомот</span></div><div class="stat"><b>${att.A}</b><span>Ғоиб${att.E ? ` · ${att.E} сабабнок` : ''}</span></div></div>
+      <div class="card"><h2>${ic('book')} Фанҳо</h2>${d.subjects.length ? d.subjects.map((s) => {
+        const se = es.filter((e) => e.subjectId === s.id);
+        const all = d.entries.filter((e) => e.subjectId === s.id);
+        const qGrades = qs.map((qq) => qGrade(all.filter((e) => e.date >= qq.start && e.date <= qq.end && e.grade != null).map((e) => e.grade)));
+        return `<div class="subj"><div><b>${esc(s.name)}</b><div class="mut">${esc(s.teacher || '')}</div></div><div>${gchip(qGrade(se.filter((e) => e.grade != null).map((e) => e.grade)))}</div>
+          <div class="gs">${se.slice().reverse().map((e) => e.attendance === 'ABSENT' ? '<span class="gr g3" title="ғоиб">Ғ</span>' : e.attendance === 'EXCUSED' ? '<span class="gr g5">С</span>' : e.grade != null ? gchip(e.grade) : '').join('') || '<span class="mut">Ҳанӯз баҳо нест</span>'}</div>
+          <div class="gs mut" style="font-size:12.5px">${qGrades.map((g, i) => `Ч${i + 1}: ${g ?? '—'}`).join(' · ')}</div></div>`;
+      }).join('') : '<div class="empty">Фанҳо ҳанӯз вобаста нашудаанд.</div>'}</div>
+      <div class="card"><h2>Охирин сабтҳо</h2><ul class="list">${d.entries.slice(0, 15).map((e) => `<li><span class="tx"><b>${esc(d.subjects.find((s) => s.id === e.subjectId)?.name || '')}</b><span>${fdate(e.date)} · ${ATT_TJ[e.attendance]}${e.behavior ? ' · ' + BEH_TJ[e.behavior] : ''}</span></span>${e.grade != null ? gchip(e.grade) : ''}</li>`).join('') || '<li class="empty">Сабт нест.</li>'}</ul></div>`;
+  };
+  app.innerHTML = `<a class="btn ghost sm" href="#/p">${ic('back')} Фарзандон</a>
+    <div class="ph"><h1>${esc(d.student.fullName)}</h1><p>Синфи ${esc(d.student.className || '—')}</p></div>
+    ${qs.length ? `<div class="chips">${qs.map((q) => `<a href="javascript:void 0" data-q="${q.number}" class="${q.number === sel ? 'on' : ''}">Чоряки ${q.number}</a>`).join('')}</div>` : ''}<div id="body"></div>`;
+  app.querySelectorAll('[data-q]').forEach((a) => (a.onclick = () => { sel = +a.dataset.q; app.querySelectorAll('[data-q]').forEach((x) => x.classList.toggle('on', x === a)); draw(); }));
+  draw();
+}, { auth: true, roles: ['PARENT'] });
+
+// ───── рӯйхати тамос ─────
+route(/^\/dir$/, async (app) => {
+  const d = await api('directory');
+  const isP = d.kind === 'parents';
+  const canChat = ['TEACHER', 'PARENT'].includes(ME.user.role);
+  app.innerHTML = `<div class="ph"><h1>${isP ? 'Волидон' : 'Омӯзгорон'}</h1><p>${d.people.length} нафар · ҷустуҷӯ аз рӯи ном</p></div>
+    <div class="card"><input id="q" placeholder="Номро нависед…" autocomplete="off"><div class="chips" id="let" style="margin-top:10px"></div><div id="ls"></div></div>`;
+  const letters = [...new Set(d.people.map((p) => (p.fullName[0] || '').toUpperCase()))].sort((a, b) => a.localeCompare(b, 'ru'));
+  let L = '';
+  $('#let').innerHTML = `<a href="javascript:void 0" data-l="" class="on">Ҳама</a>` + letters.map((l) => `<a href="javascript:void 0" data-l="${esc(l)}">${esc(l)}</a>`).join('');
+  const draw = () => {
+    const q = $('#q').value.trim().toLowerCase();
+    const list = d.people.filter((p) => (!L || p.fullName.toUpperCase().startsWith(L)) && (!q || p.fullName.toLowerCase().split(/\s+/).some((w) => w.startsWith(q)) || p.fullName.toLowerCase().includes(q)));
+    $('#ls').innerHTML = list.map((p) => `<div class="dcard"><span class="av">${initials(p.fullName)}</span><span class="tx"><b>${esc(p.fullName)}</b><span>${esc(p.info || '')}</span></span>
+      <span class="row" style="flex:none;flex-direction:column;align-items:flex-end">${p.phone ? `<a class="tel" href="tel:+${p.phone}">${esc(fphone(p.phone))}</a>` : '<span class="mut">рақам пинҳон</span>'}${canChat ? `<button class="btn sm" data-chat="${p.id}">Навиштан</button>` : ''}</span></div>`).join('') || '<div class="empty">Ёфт нашуд.</div>';
+    $('#ls').querySelectorAll('[data-chat]').forEach((b) => (b.onclick = async () => { busy(b, true); try { const c = await api('chat.open', { userId: +b.dataset.chat }); location.hash = '#/chat/' + c.id; } catch (e) { toast(e.message, 1); busy(b, false); } }));
+  };
+  $('#q').oninput = draw;
+  $('#let').querySelectorAll('[data-l]').forEach((a) => (a.onclick = () => { L = a.dataset.l; $('#let').querySelectorAll('a').forEach((x) => x.classList.toggle('on', x === a)); draw(); }));
+  draw();
+}, { auth: true });
+
+// ───── чат ─────
+route(/^\/chat$/, async (app) => {
+  const list = await api('chat.list');
+  app.innerHTML = `<div class="ph"><h1>Чат</h1><p>Ҷавобро танҳо худи одамон менависанд — чатбот нест.</p></div>
+    <div class="card">${list.length ? `<ul class="list">${list.map((c) => `<li><span class="av">${initials(c.otherName)}</span><a class="tx" style="text-decoration:none" href="#/chat/${c.id}"><b>${esc(c.otherName)}${c.unread ? ' <span class="badge">нав</span>' : ''}</b><span>${esc(c.last || 'Ҳанӯз паём нест')}</span></a><span class="mut">${c.lastMessageAt ? fdate(fday(c.lastMessageAt)) : ''}</span></li>`).join('')}</ul>`
+      : `<div class="empty">Ҳанӯз сӯҳбат нест. Аз бахши «${ME.user.role === 'TEACHER' ? 'Волидон' : 'Омӯзгорон'}» тугмаи «Навиштан»-ро пахш кунед.</div>`}</div>`;
+}, { auth: true, roles: ['TEACHER', 'PARENT'] });
+
+route(/^\/chat\/(\d+)$/, async (app, id) => {
+  let d = await api('chat.messages', { conversationId: +id });
+  let lastId = d.messages.length ? d.messages[d.messages.length - 1].id : 0;
+  const msgs = d.messages;
+  const openedAt = Date.now();
+  app.innerHTML = `<a class="btn ghost sm" href="#/chat">${ic('back')} Сӯҳбатҳо</a>
+    <div class="ph row"><span class="av">${initials(d.other.fullName)}</span><span class="sp"><h1 style="font-size:20px">${esc(d.other.fullName)}</h1><p>Ҷавобро танҳо худи ӯ менависад</p></span>${d.other.phone ? `<a class="tel" href="tel:+${d.other.phone}">${ic('phone')}</a>` : ''}</div>
+    <div class="thread" id="th"></div>
+    <form class="compose" id="cf"><input class="hp" name="website" tabindex="-1" autocomplete="off"><textarea name="body" rows="1" maxlength="2000" placeholder="Паём…" required></textarea><button class="sendb" aria-label="Фиристодан">${ic('send')}</button></form>`;
+  const draw = () => {
+    let day = '';
+    $('#th').innerHTML = msgs.map((m) => { const dd = fday(m.createdAt); const sep = dd !== day ? `<div class="daysep">${fdate(dd)}</div>` : ''; day = dd; return sep + `<div class="bub ${m.senderId === ME.user.id ? 'me' : 'th'}">${esc(m.body)}<small>${ftime(m.createdAt)}</small></div>`; }).join('') || '<div class="empty">Аввалин паёмро нависед.</div>';
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+  draw();
+  const ta = $('#cf textarea');
+  ta.oninput = () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 140) + 'px'; };
+  $('#cf').onsubmit = async (e) => {
+    e.preventDefault(); const v = fd(e.target); const b = e.target.querySelector('button'); b.disabled = true;
+    try { const m = await api('chat.send', { conversationId: +id, body: v.body, website: v.website, openedAt }); msgs.push(m); lastId = m.id; ta.value = ''; ta.style.height = ''; draw(); }
+    catch (err) { toast(err.message, 1); }
+    b.disabled = false;
+  };
+  pollTimer = setInterval(async () => {
+    if (location.hash !== '#/chat/' + id) return;
+    try { const n = await api('chat.messages', { conversationId: +id, afterId: lastId }); if (n.messages.length) { msgs.push(...n.messages); lastId = msgs[msgs.length - 1].id; draw(); } } catch {}
+  }, 7000);
+  refreshMe().then(() => bnav('/chat'));
+}, { auth: true, roles: ['TEACHER', 'PARENT'] });
+
+// ───── мутахассис ва мудир ─────
+const STAFF = ['SPECIALIST', 'DIRECTOR'];
+const sChips = (on) => `<div class="chips">${[['/s', 'Асосӣ'], ['/s/teachers', 'Омӯзгорон'], ['/s/classes', 'Синфҳо'], ['/s/subjects', 'Фанҳо'], ['/s/years', 'Сол ва чорякҳо'], ['/s/parents', 'Волидон'], ['/s/users', 'Логин ва паролҳо'], ['/s/report', 'Ҳисобот'], ['/s/settings', 'Танзимот'], ...(ME.user.role === 'DIRECTOR' ? [['/d/staff', 'Мутахассисон'], ['/d/audit', 'Аудит']] : [])].map(([h, t]) => `<a href="#${h}" class="${h === on ? 'on' : ''}">${t}</a>`).join('')}</div>`;
+
+route(/^\/s(?:\/more)?$/, async (app) => {
+  const [o, reqs] = await Promise.all([api('sp.overview'), api('sp.requests')]);
+  ME.pending = o.pending; bnav('/s');
+  app.innerHTML = `<div class="ph"><h1>${ME.user.role === 'DIRECTOR' ? 'Панели мудир' : 'Панели мутахассис'}</h1><p>${fdate(o.today)}${o.quarter ? ` · чоряки ${o.quarter.number}` : ''}${o.year ? ` · соли ${esc(o.year.name)}` : ''}</p></div>
+    ${sChips('/s')}
+    ${!o.year ? `<div class="msg warn">Соли таҳсил ҳанӯз сохта нашудааст. <a href="#/s/years"><b>Аз ин ҷо сар кунед →</b></a></div>` : ''}
+    <div class="stats">
+      <a class="stat" href="#/s/teachers"><b>${o.teachers}</b><span>Омӯзгор</span></a><a class="stat" href="#/s/classes"><b>${o.students}</b><span>Хонанда · ${o.classes} синф</span></a>
+      <a class="stat" href="#/s/parents"><b>${o.parents}</b><span>Волид</span></a><div class="stat ${o.pending ? 'alert' : ''}"><b>${o.pending}</b><span>Дархости волидон</span></div></div>
+    <div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="stat"><b>${o.todayEntries}</b><span>Сабти журнал имрӯз</span></div><div class="stat"><b>${o.todayAbsent}</b><span>Ғоибон имрӯз</span></div></div>
+    <div class="card"><h2>${ic('users')} Дархостҳои волидон</h2>${reqs.length ? `<ul class="list">${reqs.map((r) => `<li><span class="tx"><b>${esc(r.parentName)} <span class="mut">(${esc(r.relation || 'волид')})</span></b><span>${esc(fphone(r.phone))} → ${esc(r.studentName)} · ${esc(r.className || '')}</span></span>
+      <button class="btn sm green" data-ok="${r.id}">Тасдиқ</button><button class="btn sm red" data-no="${r.id}">Рад</button></li>`).join('')}</ul>` : '<div class="empty">Дархости нав нест.</div>'}</div>`;
+  app.querySelectorAll('[data-ok],[data-no]').forEach((b) => (b.onclick = async () => {
+    busy(b, true);
+    try { await api('sp.reviewRequest', { id: +(b.dataset.ok || b.dataset.no), approve: !!b.dataset.ok }); toast(b.dataset.ok ? 'Тасдиқ шуд' : 'Рад шуд'); await refreshMe(); render(); }
+    catch (e) { toast(e.message, 1); busy(b, false); }
+  }));
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/years$/, async (app) => {
+  const d = await api('sp.years');
+  const y0 = new Date().getFullYear(); const m0 = new Date().getMonth();
+  const base = m0 >= 6 ? y0 : y0 - 1;
+  const def = { name: `${base}-${base + 1}`, quarters: [[`${base}-09-01`, `${base}-11-02`], [`${base}-11-10`, `${base}-12-28`], [`${base + 1}-01-12`, `${base + 1}-03-20`], [`${base + 1}-04-01`, `${base + 1}-05-25`]].map(([start, end]) => ({ start, end })) };
+  const form = (y) => `<form class="ed" data-id="${y?.id || ''}"><label class="f">Номи сол<input name="name" value="${esc(y?.name || def.name)}" required></label>
+    ${[0, 1, 2, 3].map((i) => { const q = y?.quarters?.[i] || def.quarters[i]; return `<div class="qgrid"><b>Чоряки ${i + 1}</b><input type="date" name="s${i}" value="${q.start}" required><input type="date" name="e${i}" value="${q.end}" required></div>`; }).join('')}
+    <label class="cb" style="margin:8px 0 12px"><input type="checkbox" name="cur" ${!y || y.isCurrent ? 'checked' : ''}>Соли ҷорӣ</label>
+    <div class="m"></div><button class="btn">Нигоҳ доштан</button></form>`;
+  app.innerHTML = `<div class="ph"><h1>Сол ва чорякҳо</h1><p>Санаҳои чорякҳо баҳоҳои чорякиро муайян мекунанд.</p></div>${sChips('/s/years')}
+    ${d.years.map((y) => `<div class="card"><h2>${esc(y.name)} ${y.isCurrent ? '<span class="pill p-g">ҷорӣ</span>' : ''}</h2>
+      <ul class="list">${y.quarters.map((q) => `<li><span class="tx"><b>Чоряки ${q.number}</b><span>${fdate(q.start)} — ${fdate(q.end)}</span></span>${q.start <= d.today && d.today <= q.end ? '<span class="pill p-b">ҳозир</span>' : ''}</li>`).join('')}</ul>
+      <details><summary>Таҳрир</summary>${form(y)}</details></div>`).join('')}
+    <div class="card"><h2>${ic('plus')} Соли нав</h2>${d.years.length ? '<details><summary>Илова кардан</summary>' + form(null) + '</details>' : form(null)}</div>`;
+  app.querySelectorAll('form.ed').forEach((f) => (f.onsubmit = async (e) => {
+    e.preventDefault(); const v = fd(f); const b = f.querySelector('.btn'); busy(b, true);
+    try { await api('sp.saveYear', { id: f.dataset.id || null, name: v.name, makeCurrent: !!v.cur, quarters: [0, 1, 2, 3].map((i) => ({ start: v['s' + i], end: v['e' + i] })) }); await refreshMe(); toast('Нигоҳ дошта шуд'); render(); }
+    catch (err) { f.querySelector('.m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+  }));
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/subjects$/, async (app) => {
+  const subs = await api('sp.subjects');
+  app.innerHTML = `<div class="ph"><h1>Фанҳо</h1><p>${subs.length} фан</p></div>${sChips('/s/subjects')}
+    <form class="card" id="af"><h2>${ic('plus')} Илова кардан</h2><label class="f">Номи фан(ҳо) — ҳар сатр як фан<textarea name="names" rows="3" placeholder="Математика&#10;Забони тоҷикӣ"></textarea></label><div id="am"></div><button class="btn">Илова кардан</button></form>
+    <div class="card"><ul class="list">${subs.map((s) => `<li><span class="tx"><b>${esc(s.name)}</b><span>${s.teachers} тақсимот</span></span><button class="btn ghost sm" data-ren="${s.id}">Ном</button><button class="btn red sm" data-del="${s.id}">Нест</button></li>`).join('') || '<li class="empty">Фан нест.</li>'}</ul></div>`;
+  $('#af').onsubmit = async (e) => { e.preventDefault(); const b = e.target.querySelector('.btn'); busy(b, true); try { await api('sp.saveSubject', { names: fd(e.target).names.split('\n') }); toast('Илова шуд'); render(); } catch (err) { $('#am').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); } };
+  app.querySelectorAll('[data-ren]').forEach((b) => (b.onclick = async () => { const s = subs.find((x) => x.id === +b.dataset.ren); const n = prompt('Номи нав:', s.name); if (!n) return; try { await api('sp.saveSubject', { id: s.id, name: n }); render(); } catch (e) { toast(e.message, 1); } }));
+  app.querySelectorAll('[data-del]').forEach((b) => (b.onclick = async () => { if (!confirm('Фанро нест кунем?')) return; try { await api('sp.deleteSubject', { id: +b.dataset.del }); toast('Нест шуд'); render(); } catch (e) { toast(e.message, 1); } }));
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/classes$/, async (app) => {
+  const cls = await api('sp.classes');
+  app.innerHTML = `<div class="ph"><h1>Синфҳо</h1><p>${cls.length} синф · ${cls.reduce((a, c) => a + c.students, 0)} хонанда</p></div>${sChips('/s/classes')}
+    <form class="card" id="af"><h2>${ic('plus')} Илова кардани синф</h2><label class="f">Номҳо бо вергул: 5-А, 5-Б, 6-А<input name="names" required></label><div id="am"></div><button class="btn">Илова кардан</button></form>
+    <div class="card"><div class="tiles">${cls.map((c) => `<a class="tile" href="#/s/class/${c.id}"><b>${esc(c.name)}</b><span>${c.students} хонанда</span></a>`).join('') || '<div class="empty">Синф нест.</div>'}</div></div>`;
+  $('#af').onsubmit = async (e) => { e.preventDefault(); const b = e.target.querySelector('.btn'); busy(b, true); try { await api('sp.saveClass', { names: [fd(e.target).names] }); toast('Илова шуд'); render(); } catch (err) { $('#am').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); } };
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/class\/(\d+)$/, async (app, id) => {
+  const [cls, st] = await Promise.all([api('sp.classes'), api('sp.students', { classId: +id })]);
+  const c = cls.find((x) => x.id === +id); if (!c) throw new Error('Синф ёфт нашуд.');
+  app.innerHTML = `<a class="btn ghost sm" href="#/s/classes">${ic('back')} Синфҳо</a>
+    <div class="ph row"><span class="sp"><h1>Синфи ${esc(c.name)}</h1><p>${st.length} хонанда</p></span><button class="btn ghost sm" id="ren">Ном</button><button class="btn red sm" id="del">Нест</button></div>
+    <form class="card" id="af"><h2>${ic('plus')} Илова кардани хонандагон</h2><label class="f">Ному насаб — ҳар сатр як хонанда<textarea name="names" rows="4" placeholder="Боқиева Мадина Ҷамшедовна&#10;Раҳимов Алӣ Каримович"></textarea></label><div id="am"></div><button class="btn">Илова кардан</button></form>
+    <div class="card"><ul class="list" id="ls">${st.map((s) => `<li data-s="${s.id}"><span class="av">${initials(s.fullName)}</span><span class="tx"><b>${esc(s.fullName)}</b><span>${STATUS_TJ[s.status]}${s.parents ? ' · ' + esc(s.parents) : ''}</span></span><button class="btn ghost sm" data-ed="${s.id}">Таҳрир</button></li>`).join('') || '<li class="empty">Хонанда нест.</li>'}</ul></div>`;
+  $('#af').onsubmit = async (e) => { e.preventDefault(); const b = e.target.querySelector('.btn'); busy(b, true); try { const r = await api('sp.addStudents', { classId: +id, names: fd(e.target).names }); toast(`Илова шуд: ${r.added}`); render(); } catch (err) { $('#am').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); } };
+  $('#ren').onclick = async () => { const n = prompt('Номи нави синф (масалан 8-Б):', c.name); if (!n) return; try { await api('sp.saveClass', { id: c.id, name: n }); render(); } catch (e) { toast(e.message, 1); } };
+  $('#del').onclick = async () => { if (!confirm('Синфро нест кунем?')) return; try { await api('sp.deleteClass', { id: c.id }); toast('Нест шуд'); location.hash = '#/s/classes'; } catch (e) { toast(e.message, 1); } };
+  app.querySelectorAll('[data-ed]').forEach((b) => (b.onclick = () => {
+    const s = st.find((x) => x.id === +b.dataset.ed); const li = b.closest('li');
+    if (li.nextElementSibling?.classList.contains('edrow')) { li.nextElementSibling.remove(); return; }
+    const f = document.createElement('li'); f.className = 'edrow'; f.style.display = 'block';
+    f.innerHTML = `<form class="ed"><label class="f">Ному насаб<input name="fullName" value="${esc(s.fullName)}" required></label>
+      <label class="f">Ҳолат<select name="status">${Object.entries(STATUS_TJ).map(([k, v]) => `<option value="${k}" ${k === s.status ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+      <label class="f">Синф<select name="classId">${cls.map((x) => `<option value="${x.id}" ${x.id === c.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></label>
+      <div class="row"><button class="btn">Нигоҳ доштан</button><button type="button" class="btn red" data-x>Нест кардан</button></div></form>`;
+    li.after(f);
+    f.querySelector('form').onsubmit = async (e) => { e.preventDefault(); try { await api('sp.updateStudent', { id: s.id, ...fd(e.target) }); toast('Нигоҳ дошта шуд'); render(); } catch (err) { toast(err.message, 1); } };
+    f.querySelector('[data-x]').onclick = async () => { if (!confirm('Хонандаро нест кунем?')) return; try { await api('sp.deleteStudent', { id: s.id }); toast('Нест шуд'); render(); } catch (err) { toast(err.message, 1); } };
+  }));
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/teachers$/, async (app) => {
+  const [ts, cls, subs] = await Promise.all([api('sp.teachers'), api('sp.classes'), api('sp.subjects')]);
+  const pairForm = (t) => {
+    const sel = new Set((t?.assignments || []).map((a) => `${a.classId}:${a.subjectId}`));
+    return `<form class="ed" data-id="${t?.id || ''}"><label class="f">Ному насаб<input name="fullName" value="${esc(t?.fullName || '')}" required placeholder="Каримов Саид Ҳасанович"></label>
+      <label class="f">Телефон (ихтиёрӣ)<input name="phone" inputmode="tel" value="${esc(fphone(t?.phone))}" placeholder="90 123 4567"></label>
+      <b style="font-size:14px">Фан ва синфҳо</b>
+      ${subs.length && cls.length ? subs.map((s) => `<details ${[...sel].some((k) => k.endsWith(':' + s.id)) ? 'open' : ''}><summary>${esc(s.name)}</summary><div class="kids" style="grid-template-columns:repeat(auto-fill,minmax(80px,1fr))">${cls.map((c) => `<label class="cb"><input type="checkbox" name="a" value="${c.id}:${s.id}" ${sel.has(`${c.id}:${s.id}`) ? 'checked' : ''}>${esc(c.name)}</label>`).join('')}</div></details>`).join('')
+        : '<div class="msg warn">Аввал фанҳо ва синфҳоро илова кунед.</div>'}
+      <div class="m"></div><div class="row" style="margin-top:12px"><button class="btn">${t ? 'Нигоҳ доштан' : 'Илова кардан'}</button>${t ? '<button type="button" class="btn red" data-x>Нест кардан</button>' : ''}</div></form>`;
+  };
+  app.innerHTML = `<div class="ph"><h1>Омӯзгорон</h1><p>${ts.filter((t) => t.isActive).length} фаъол</p></div>${sChips('/s/teachers')}
+    <div class="card"><h2>${ic('plus')} Омӯзгори нав</h2><details><summary>Илова кардан</summary>${pairForm(null)}</details></div>
+    ${ts.map((t) => `<div class="card"><div class="row"><span class="av">${initials(t.fullName)}</span><span class="sp"><b>${esc(t.fullName)}</b> ${t.isActive ? '' : '<span class="pill p-r">бойгонӣ</span>'}<div class="mut">Логин: ${esc(t.login)}${t.phone ? ' · ' + esc(fphone(t.phone)) : ''}${t.mustChangePassword ? ' · пароли муваққатӣ' : ''}</div></span></div>
+      <div class="row" style="margin-top:8px">${t.assignments.map((a) => `<span class="pill p-b">${esc(a.subjectName)} · ${esc(a.className)}</span>`).join('') || '<span class="mut">Тақсимот нест</span>'}</div>
+      <details><summary>Таҳрир</summary>${pairForm(t)}</details></div>`).join('')}`;
+  app.querySelectorAll('form.ed').forEach((f) => {
+    f.onsubmit = async (e) => {
+      e.preventDefault(); const b = f.querySelector('.btn'); busy(b, true);
+      const v = fd(f); const as = [...f.querySelectorAll('input[name=a]:checked')].map((i) => { const [classId, subjectId] = i.value.split(':'); return { classId: +classId, subjectId: +subjectId }; });
+      try { const r = await api('sp.saveTeacher', { id: f.dataset.id || null, fullName: v.fullName, phone: v.phone, assignments: as }); if (r.credentials) { f.closest('.card').insertAdjacentHTML('afterend', `<div class="card">${slip(r.credentials)}<button class="btn" onclick="render()">Хуб</button></div>`); f.closest('details').open = false; busy(b, false); toast('Омӯзгор илова шуд'); } else { toast('Нигоҳ дошта шуд'); render(); } }
+      catch (err) { f.querySelector('.m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); }
+    };
+    const x = f.querySelector('[data-x]');
+    if (x) x.onclick = async () => { if (!confirm('Омӯзгорро нест кунем? (агар сабт дошта бошад, ба бойгонӣ меравад)')) return; try { const r = await api('sp.deleteUser', { id: +f.dataset.id }); toast(r.archived ? 'Ба бойгонӣ гузашт' : 'Нест шуд'); render(); } catch (e) { toast(e.message, 1); } };
+  });
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/parents$/, async (app) => {
+  const [ps, reqs] = await Promise.all([api('sp.parents'), api('sp.requests')]);
+  app.innerHTML = `<div class="ph"><h1>Волидон</h1><p>${ps.length} волид · ${reqs.length} дархост</p></div>${sChips('/s/parents')}
+    ${reqs.length ? `<div class="card"><h2>Дархостҳо</h2><ul class="list">${reqs.map((r) => `<li><span class="tx"><b>${esc(r.parentName)}</b><span>${esc(fphone(r.phone))} → ${esc(r.studentName)} (${esc(r.className || '')})</span></span><button class="btn sm green" data-ok="${r.id}">Тасдиқ</button><button class="btn sm red" data-no="${r.id}">Рад</button></li>`).join('')}</ul></div>` : ''}
+    <div class="card"><ul class="list">${ps.map((p) => `<li style="flex-wrap:wrap"><span class="av">${initials(p.fullName)}</span><span class="tx"><b>${esc(p.fullName)}</b><span>${esc(fphone(p.phone))}${p.isActive ? '' : ' · ғайрифаъол'}</span></span>
+      <span style="flex-basis:100%" class="row">${p.children.map((c) => `<span class="pill p-b">${esc(c.name)} <a href="javascript:void 0" data-un="${p.id}:${c.id}" title="Ҷудо кардан">✕</a></span>`).join('') || '<span class="mut">Фарзанд пайваст нест</span>'}</span></li>`).join('') || '<li class="empty">Волид нест.</li>'}</ul></div>`;
+  app.querySelectorAll('[data-ok],[data-no]').forEach((b) => (b.onclick = async () => { busy(b, true); try { await api('sp.reviewRequest', { id: +(b.dataset.ok || b.dataset.no), approve: !!b.dataset.ok }); await refreshMe(); render(); } catch (e) { toast(e.message, 1); busy(b, false); } }));
+  app.querySelectorAll('[data-un]').forEach((a) => (a.onclick = async () => { if (!confirm('Фарзандро аз ин волид ҷудо кунем?')) return; const [parentId, studentId] = a.dataset.un.split(':'); try { await api('sp.unlink', { parentId: +parentId, studentId: +studentId }); render(); } catch (e) { toast(e.message, 1); } }));
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/users$/, async (app) => {
+  const us = await api('sp.users');
+  const R = { SPECIALIST: 'Мутахассис', TEACHER: 'Омӯзгор', PARENT: 'Волид' };
+  app.innerHTML = `<div class="ph"><h1>Логин ва паролҳо</h1><p>Бе донистани пароли пешина иваз мекунед.</p></div>${sChips('/s/users')}
+    <div class="card"><input id="q" placeholder="Ҷустуҷӯ аз рӯи ном ё логин…"><ul class="list" id="ls" style="margin-top:8px"></ul></div>`;
+  const draw = () => {
+    const q = $('#q').value.trim().toLowerCase();
+    $('#ls').innerHTML = us.filter((u) => !q || u.fullName.toLowerCase().includes(q) || u.login.includes(q)).map((u) => `<li style="flex-wrap:wrap" data-u="${u.id}"><span class="tx"><b>${esc(u.fullName)}</b><span>${R[u.role]} · ${esc(u.login)}${u.isActive ? '' : ' · <span class="pill p-r">баста</span>'}${u.locked ? ' · <span class="pill p-a">муваққатан баста</span>' : ''}</span></span><button class="btn ghost sm" data-ed="${u.id}">Иваз</button></li>`).join('');
+    $('#ls').querySelectorAll('[data-ed]').forEach((b) => (b.onclick = () => {
+      const u = us.find((x) => x.id === +b.dataset.ed); const li = b.closest('li');
+      if (li.querySelector('form')) { li.querySelector('form').remove(); return; }
+      li.insertAdjacentHTML('beforeend', `<form class="ed" style="flex-basis:100%"><label class="f">Логин<input name="login" value="${esc(u.login)}" autocapitalize="none"></label>
+        <label class="f">Парол<select name="passwordMode"><option value="keep">Бетағйир</option><option value="random">Пароли нави тасодуфӣ</option><option value="manual">Худам менависам</option></select></label>
+        <label class="f" data-man hidden>Пароли нав${pwField('password', '', 'new-password').replace('required', '')}</label>
+        <label class="cb" style="margin-bottom:10px"><input type="checkbox" name="mustChange" checked>Дар воридшавӣ паролро иваз кунад</label>
+        <div class="m"></div><div class="row"><button class="btn">Нигоҳ доштан</button><button type="button" class="btn ghost" data-act>${u.isActive ? 'Бастани ҳисоб' : 'Кушодани ҳисоб'}</button></div></form>`);
+      const f = li.querySelector('form');
+      f.passwordMode.onchange = () => (f.querySelector('[data-man]').hidden = f.passwordMode.value !== 'manual');
+      f.onsubmit = async (e) => { e.preventDefault(); const v = fd(f); const bb = f.querySelector('.btn'); busy(bb, true); try { const r = await api('sp.setCredentials', { id: u.id, login: v.login, passwordMode: v.passwordMode, password: v.password, mustChange: !!v.mustChange }); u.login = r.login; f.querySelector('.m').innerHTML = r.password ? slip({ login: r.login, password: r.password }) : '<div class="msg ok">Нигоҳ дошта шуд.</div>'; busy(bb, false); } catch (err) { f.querySelector('.m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(bb, false); } };
+      f.querySelector('[data-act]').onclick = async () => { try { await api('sp.setActive', { id: u.id, active: !u.isActive }); render(); } catch (e) { toast(e.message, 1); } };
+    }));
+  };
+  $('#q').oninput = draw; draw();
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/report(?:\/(\d+))?$/, async (app, cid) => {
+  const cls = await api('sp.classes');
+  const classId = +(cid || cls[0]?.id || 0);
+  if (!classId) { app.innerHTML = `<div class="ph"><h1>Ҳисобот</h1></div>${sChips('/s/report')}<div class="card empty">Синф нест.</div>`; return; }
+  let q = ME.quarter?.number || 1;
+  const load = async () => {
+    const r = await api('sp.classReport', { classId, quarter: q });
+    $('#rep').innerHTML = `<div class="chips noprint">${r.quarters.map((x) => `<a href="javascript:void 0" data-q="${x.number}" class="${x.number === r.quarter ? 'on' : ''}">Чоряки ${x.number}</a>`).join('')}</div>
+      <div class="card"><div class="row"><h2 class="sp" style="margin:0">Синфи ${esc(cls.find((c) => c.id === classId)?.name)} · чоряки ${r.quarter}</h2><button class="btn ghost sm noprint" onclick="print()">${ic('print')} Чоп</button></div>
+      <div class="scroll" style="margin-top:10px"><table><thead><tr><th class="sticky">Хонанда</th>${r.subjects.map((s) => `<th class="n">${esc(s.name)}</th>`).join('')}<th class="n">Миёна</th><th class="n">Ғоиб</th></tr></thead><tbody>
+      ${r.students.map((s) => { const gs = r.subjects.map((sub) => r.grades[s.id + ':' + sub.id] ?? null); const v = gs.filter((g) => g != null); return `<tr><td class="sticky">${esc(s.fullName)}</td>${gs.map((g) => `<td class="n">${gchip(g)}</td>`).join('')}<td class="n"><b>${v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : '—'}</b></td><td class="n">${r.absent[s.id] || 0}</td></tr>`; }).join('')}
+      </tbody></table></div>${r.subjects.length ? '' : '<div class="empty">Ба ин синф фан вобаста нашудааст.</div>'}</div>`;
+    $('#rep').querySelectorAll('[data-q]').forEach((a) => (a.onclick = () => { q = +a.dataset.q; load(); }));
+  };
+  app.innerHTML = `<div class="ph"><h1>Ҳисобот</h1><p>Баҳоҳои чорякӣ аз рӯи синф</p></div>${sChips('/s/report')}
+    <div class="chips noprint">${cls.map((c) => `<a href="#/s/report/${c.id}" class="${c.id === classId ? 'on' : ''}">${esc(c.name)}</a>`).join('')}</div><div id="rep"><div class="spin"></div></div>`;
+  await load();
+}, { auth: true, roles: STAFF });
+
+route(/^\/s\/settings$/, async (app) => {
+  const s = await api('sp.settings');
+  app.innerHTML = `<div class="ph"><h1>Танзимот</h1></div>${sChips('/s/settings')}
+    <form class="card" id="f"><label class="cb" style="margin-bottom:12px"><input type="checkbox" name="allow" ${s.allowParentSignup ? 'checked' : ''}>Волидон худашон сабти ном шуда метавонанд</label>
+    <label class="f">Шумораи кӯшишҳои нодурусти воридшавӣ<input type="number" name="max" min="3" max="20" value="${s.maxLoginAttempts}"></label>
+    <label class="f">Бастани ҳисоб баъди он (дақиқа)<input type="number" name="lock" min="1" max="1440" value="${s.lockMinutes}"></label>
+    <button class="btn">Нигоҳ доштан</button></form>`;
+  $('#f').onsubmit = async (e) => { e.preventDefault(); const v = fd(e.target); try { await api('sp.settings', { save: true, allowParentSignup: !!v.allow, maxLoginAttempts: +v.max, lockMinutes: +v.lock }); toast('Нигоҳ дошта шуд'); } catch (err) { toast(err.message, 1); } };
+}, { auth: true, roles: STAFF });
+
+// ───── мудир ─────
+route(/^\/d\/staff$/, async (app) => {
+  const us = (await api('sp.users')).filter((u) => u.role === 'SPECIALIST');
+  app.innerHTML = `<div class="ph"><h1>Мутахассисон</h1><p>Мутахассис омӯзгорон, синфҳо ва волидонро идора мекунад.</p></div>${sChips('/d/staff')}
+    <form class="card" id="f"><h2>${ic('plus')} Мутахассиси нав</h2><label class="f">Ному насаб<input name="fullName" required></label><div id="m"></div><button class="btn">Сохтан</button></form>
+    <div class="card"><ul class="list">${us.map((u) => `<li><span class="av">${initials(u.fullName)}</span><span class="tx"><b>${esc(u.fullName)}</b><span>Логин: ${esc(u.login)}${u.isActive ? '' : ' · баста'}</span></span><a class="btn ghost sm" href="#/s/users">Парол</a></li>`).join('') || '<li class="empty">Ҳанӯз мутахассис нест.</li>'}</ul></div>`;
+  $('#f').onsubmit = async (e) => { e.preventDefault(); const b = e.target.querySelector('.btn'); busy(b, true); try { const r = await api('dir.createStaff', fd(e.target)); $('#m').innerHTML = slip(r.credentials); e.target.reset(); busy(b, false); } catch (err) { $('#m').innerHTML = `<div class="msg err">${esc(err.message)}</div>`; busy(b, false); } };
+}, { auth: true, roles: ['DIRECTOR'] });
+
+route(/^\/d\/audit$/, async (app) => {
+  const rows = await api('dir.audit', { limit: 200 });
+  const A = { 'auth.login': 'Ворид шуд', 'auth.login_failed': 'Пароли нодуруст', 'password.change': 'Паролро иваз кард', 'login.change': 'Логинро иваз кард', 'journal.save': 'Журнал нигоҳ дошт', 'teacher.create': 'Омӯзгор илова кард', 'teacher.update': 'Омӯзгорро таҳрир кард', 'student.create': 'Хонанда илова кард', 'student.update': 'Хонандаро таҳрир кард', 'student.delete': 'Хонандаро нест кард', 'class.create': 'Синф илова кард', 'class.delete': 'Синфро нест кард', 'subject.create': 'Фан илова кард', 'subject.delete': 'Фанро нест кард', 'year.save': 'Сол/чорякҳоро нигоҳ дошт', 'link.approve': 'Дархости волидро тасдиқ кард', 'link.reject': 'Дархости волидро рад кард', 'link.request': 'Дархост фиристод', 'link.remove': 'Фарзандро ҷудо кард', 'parent.register': 'Волид сабти ном шуд', 'credentials.set': 'Логин/паролро иваз кард', 'user.archive': 'Ба бойгонӣ гузошт', 'user.delete': 'Корбарро нест кард', 'user.activate': 'Ҳисобро кушод', 'user.deactivate': 'Ҳисобро баст', 'settings.update': 'Танзимотро иваз кард', 'specialist.create': 'Мутахассис сохт', setup: 'Портал танзим шуд' };
+  app.innerHTML = `<div class="ph"><h1>Аудит</h1><p>Ҳамаи амалҳо дар портал. Ин сабтҳо тағйир дода намешаванд.</p></div>${sChips('/d/audit')}
+    <div class="card"><ul class="list">${rows.map((r) => `<li><span class="tx"><b>${esc(A[r.action] || r.action)}</b><span>${esc(r.actor || '—')} · ${new Date(r.createdAt).toLocaleString('ru-RU', { timeZone: 'Asia/Dushanbe' })}</span></span></li>`).join('') || '<li class="empty">Сабт нест.</li>'}</ul></div>`;
+}, { auth: true, roles: ['DIRECTOR'] });
+
+render();
+</script>
+</body>
+</html>

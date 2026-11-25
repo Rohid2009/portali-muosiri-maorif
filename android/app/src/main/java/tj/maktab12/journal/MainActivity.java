@@ -31,7 +31,10 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import android.webkit.WebResourceResponse;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.webkit.WebViewAssetLoader;
 
 /**
  * «Журнали мактаб» — пӯсти Android барои «Портали муосири маориф».
@@ -39,7 +42,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 public class MainActivity extends Activity {
 
-    private static final String APP_URL = BuildConfig.APP_URL;
+    /** Саҳифаҳо дар дохили APK; маълумот аз сервери Supabase (API) меояд. */
+    private static final String APP_HOST = "appassets.androidplatform.net";
+    private static final String APP_URL = "https://" + APP_HOST + "/assets/app/index.html";
+    private WebViewAssetLoader assetLoader;
     private static final String OFFLINE = "file:///android_asset/offline.html";
     private static final int REQ_FILE = 41;
     private static final int REQ_STORAGE = 42;
@@ -82,6 +88,10 @@ public class MainActivity extends Activity {
         cm.setAcceptCookie(true);
         cm.setAcceptThirdPartyCookies(web, false);
 
+        assetLoader = new WebViewAssetLoader.Builder()
+                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
+                .build();
+
         web.addJavascriptInterface(new Bridge(), "MaorifApp");
         web.setWebViewClient(new Client());
         web.setWebChromeClient(new Chrome());
@@ -121,8 +131,7 @@ public class MainActivity extends Activity {
     }
 
     private static boolean isOwnSite(Uri u) {
-        Uri base = Uri.parse(APP_URL);
-        return "https".equals(u.getScheme()) && base.getHost() != null && base.getHost().equalsIgnoreCase(u.getHost());
+        return "https".equals(u.getScheme()) && APP_HOST.equalsIgnoreCase(u.getHost());
     }
 
     private void openExternal(Uri u) {
@@ -134,6 +143,11 @@ public class MainActivity extends Activity {
     }
 
     private final class Client extends WebViewClient {
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest req) {
+            return assetLoader.shouldInterceptRequest(req.getUrl());
+        }
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {
             Uri u = req.getUrl();
