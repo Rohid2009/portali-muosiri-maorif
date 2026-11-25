@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Суроғаи сайт: дар GitHub → Settings → Variables → APP_URL иваз мешавад
+def appUrl = System.getenv('APP_URL') ?: 'https://portali-maorif.onrender.com'
+def vCode = (System.getenv('VERSION_CODE') ?: '1') as int
+def ks = new Properties()
+def ksFile = rootProject.file('keystore/keystore.properties')
+if (ksFile.exists()) ksFile.withInputStream { ks.load(it) }
+
+android {
+    namespace 'tj.maktab12.journal'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'tj.maktab12.journal'
+        minSdk 24
+        targetSdk 35
+        versionCode vCode
+        versionName "1.0.${vCode}"
+        buildConfigField 'String', 'APP_URL', "\"${appUrl}\""
+    }
+
+    buildFeatures { buildConfig true }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file('keystore/release.jks')
+            storePassword ks.getProperty('storePassword')
+            keyAlias ks.getProperty('keyAlias')
+            keyPassword ks.getProperty('keyPassword')
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+}

@@ -8,6 +8,8 @@ services:
     region: frankfurt          # дар паҳлӯи Supabase (eu-central-1)
     branch: main
     autoDeploy: true
+    buildFilter:
+      ignoredPaths: ['android/**', '.github/**', 'docs/**']
     buildCommand: npm install --no-audit --no-fund && npm run deploy:build
     startCommand: npm start
     healthCheckPath: /api/health
