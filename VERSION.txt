@@ -1,0 +1,3 @@
+Версия: 1.0.3
+Сайт: Supabase (bdzbtiyttuekcehgbgqf)
+Commit: e3eebcd5f3b7cb1876a264c46e4a489d54ba66cd
