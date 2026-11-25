@@ -6,6 +6,8 @@
 #   DATABASE_URL       — пайвасти мустақими база (на pooler)
 #   BACKUP_PASSPHRASE  — рамзи қавӣ барои рамзгузории нусха (онро дар ҷои бехатар нигоҳ доред!)
 #   RCLONE_CONF        — (ихтиёрӣ) матни rclone.conf бо remote-и "backup"
+# Variables: BACKUP_ENABLED = true — танҳо ҳамон вақт кор мекунад (база дар Neon ё дигар
+#   хидмати аз интернет дастрас). Дар Oracle база дар худи сервер аст ва бэкапро cron мекунад.
 #
 # ⚠️ Репозиторий бояд PRIVATE бошад.
 
@@ -21,6 +23,7 @@ permissions:
 
 jobs:
   backup:
+    if: vars.BACKUP_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     services:
