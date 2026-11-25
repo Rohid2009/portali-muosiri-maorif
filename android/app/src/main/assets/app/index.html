@@ -212,8 +212,8 @@ function confirmLeave() { return true; }
 const NAV = {
   TEACHER: [['#/t', 'home', 'Синфҳо'], ['#/dir', 'users', 'Волидон'], ['#/chat', 'chat', 'Чат'], ['#/account', 'key', 'Ҳисоб']],
   PARENT: [['#/p', 'home', 'Фарзандон'], ['#/dir', 'users', 'Омӯзгорон'], ['#/chat', 'chat', 'Чат'], ['#/account', 'key', 'Ҳисоб']],
-  SPECIALIST: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/classes', 'grid', 'Синфҳо'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/s/more', 'users', 'Дигар']],
-  DIRECTOR: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/d/audit', 'book', 'Аудит'], ['#/s/more', 'users', 'Дигар']],
+  SPECIALIST: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/classes', 'grid', 'Синфҳо'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/s/parents', 'users', 'Волидон']],
+  DIRECTOR: [['#/s', 'home', 'Асосӣ'], ['#/s/teachers', 'case', 'Омӯзгорон'], ['#/s/report', 'chart', 'Ҳисобот'], ['#/d/audit', 'book', 'Аудит'], ['#/s/parents', 'users', 'Волидон']],
 };
 function bnav(path) {
   const n = $('#bnav');
@@ -375,7 +375,7 @@ route(/^\/t$/, async (app) => {
   app.innerHTML = `<div class="ph"><h1>Салом, ${esc(ME.user.fullName.split(' ')[1] || ME.user.fullName)}!</h1>
     <p>Имрӯз ${fdate(ME.today)}${q ? ` · чоряки ${q.number}` : ' · таътил ё чоряк муқаррар нашудааст'}</p></div>
     <div class="card"><h2>${ic('book')} Синф ва фанҳои ман</h2>
-    ${as.length ? `<div class="tiles">${as.map((a) => `<a class="tile" href="#/t/j/${a.id}"><b>${esc(a.className)}</b><span>${esc(a.subjectName)}</span><span>${a.students} хонанда${a.todayEntries ? ` · <span class="pill p-g">имрӯз ✓</span>` : ''}</span></a>`).join('')}</div>`
+    ${as.length ? `<div class="tiles">${as.map((a) => `<a class="tile" href="#/t/j/${a.id}"><b>${esc(a.className)}</b><span>${esc(a.subjectName)}</span><span>${a.students} хонанда</span>${a.todayEntries ? '<span><span class="pill p-g">имрӯз ✓</span></span>' : ''}</a>`).join('')}</div>`
       : '<div class="empty">Ҳоло ба шумо синф ё фан вобаста нашудааст. Ба мутахассис муроҷиат кунед.</div>'}</div>`;
 }, { auth: true, roles: ['TEACHER'] });
 

@@ -1,5 +1,17 @@
 # Ҷойгиркунӣ, бэкап ва гузариш
 
+## ★★ Ҳозира кор мекунад: танҳо Supabase + APK (бе Render)
+
+- **Сервер:** Supabase Edge Function `api` — `supabase/functions/api/index.ts`
+  (`https://bdzbtiyttuekcehgbgqf.supabase.co/functions/v1/api`, санҷиш: `…/api/health`).
+  Ҳамаи қоидаҳо ва ҳуқуқҳо ин ҷо санҷида мешаванд. База — схемаи `maorif`.
+- **Интерфейс:** `android/app/src/main/assets/app/index.html` — дар дохили APK
+  (WebViewAssetLoader). Ҳар push ба `android/**` → GitHub Actions APK-и нав месозад
+  (Releases ва шохаи `apk`).
+- **Навсозии сервер:** коди `supabase/functions/api/index.ts`-ро иваз карда, бо Supabase CLI
+  `supabase functions deploy api --no-verify-jwt --project-ref bdzbtiyttuekcehgbgqf` бор кунед.
+- Воридшавии аввал: мудир, логини `mudir`, пароли муваққатӣ (дар воридшавии аввал иваз мешавад).
+
 ## ★ Ҳозира: Supabase (база) + Render (сайт) — бе корти бонкӣ
 
 - **База:** Supabase, лоиҳаи `portali-maorif-mtmu12` (Frankfurt, `eu-central-1`).
