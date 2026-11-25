@@ -13,7 +13,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "test": "node --experimental-strip-types --no-warnings --test src/lib/grades.test.ts src/lib/credentials.test.ts src/lib/periods.test.ts",
     "db:harden": "prisma db execute --file prisma/sql/audit_log_append_only.sql --schema prisma/schema.prisma",
-    "vercel-build": "prisma generate && prisma migrate deploy && npm run db:harden && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && npm run db:harden && next build",
+    "deploy:build": "prisma generate && prisma migrate deploy && npm run db:harden && npm run db:seed && next build"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

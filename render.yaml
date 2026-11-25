@@ -1,0 +1,36 @@
+# Render Blueprint: dashboard.render.com → New → Blueprint → ҳамин репозиторий.
+# Қиматҳои «sync: false»-ро Render ҳангоми сохтан мепурсад (онҳо ба GitHub намераванд).
+services:
+  - type: web
+    name: portali-maorif
+    runtime: node
+    plan: free
+    region: frankfurt          # дар паҳлӯи Supabase (eu-central-1)
+    branch: main
+    autoDeploy: true
+    buildCommand: npm install --no-audit --no-fund && npm run deploy:build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: CLIENT_IP_HEADER
+        value: true-client-ip
+      - key: SCHOOL_NAME
+        value: МТМУ №12
+      - key: SCHOOL_DISTRICT
+        value: Зафаробод
+      - key: SEED_DIRECTOR_LOGIN
+        value: mudir
+      - key: SEED_DIRECTOR_NAME
+        value: Мудири мактаб
+      - key: SEED_SPECIALIST
+        value: "0"
+      - key: DATABASE_URL         # Supabase, transaction pooler (6543)
+        sync: false
+      - key: DIRECT_URL           # Supabase, session pooler (5432)
+        sync: false
+      - key: SEED_DIRECTOR_PASSWORD
+        sync: false

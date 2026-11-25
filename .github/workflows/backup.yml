@@ -6,6 +6,7 @@
 #   DATABASE_URL       — пайвасти мустақими база (на pooler)
 #   BACKUP_PASSPHRASE  — рамзи қавӣ барои рамзгузории нусха (онро дар ҷои бехатар нигоҳ доред!)
 #   RCLONE_CONF        — (ихтиёрӣ) матни rclone.conf бо remote-и "backup"
+# Variables: DB_SCHEMA — схемаи база (Supabase: maorif; холӣ = public)
 # Variables: BACKUP_ENABLED = true — танҳо ҳамон вақт кор мекунад (база дар Neon ё дигар
 #   хидмати аз интернет дастрас). Дар Oracle база дар худи сервер аст ва бэкапро cron мекунад.
 #
@@ -42,14 +43,17 @@ jobs:
       - name: pg_dump
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_SCHEMA: ${{ vars.DB_SCHEMA || 'public' }}
         run: |
-          docker run --rm --network host -v "$PWD:/out" -e DATABASE_URL postgres:17 \
-            sh -c 'pg_dump "$DATABASE_URL" -Fc --no-owner --no-privileges -f /out/maorif.dump'
+          docker run --rm --network host -v "$PWD:/out" -e DATABASE_URL -e DB_SCHEMA postgres:17 \
+            sh -c 'pg_dump "$DATABASE_URL" -n "$DB_SCHEMA" -Fc --no-owner --no-privileges -f /out/maorif.dump'
           ls -lh maorif.dump
 
       - name: Санҷиши бозгардонӣ (restore) ба базаи муваққатӣ
+        env:
+          DB_SCHEMA: ${{ vars.DB_SCHEMA || 'public' }}
         run: |
-          docker run --rm --network host -v "$PWD:/out" -e PGPASSWORD=restoretest postgres:17 sh -c '
+          docker run --rm --network host -v "$PWD:/out" -e PGPASSWORD=restoretest -e PGOPTIONS="-c search_path=$DB_SCHEMA,public" postgres:17 sh -c '
             pg_restore -h localhost -p 5433 -U postgres -d postgres --no-owner --no-privileges /out/maorif.dump || true
             USERS=$(psql -h localhost -p 5433 -U postgres -d postgres -tAc "select count(*) from \"User\"")
             echo "Корбарон дар нусха: $USERS"
