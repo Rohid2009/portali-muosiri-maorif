@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
-      - run: npm ci || npm install
+        with: { node-version: 22 }
+      - run: npm install --no-audit --no-fund
       - run: npx prisma validate
         env: { DATABASE_URL: "postgresql://x:x@localhost:5432/x", DIRECT_URL: "postgresql://x:x@localhost:5432/x" }
       - run: npx prisma generate
